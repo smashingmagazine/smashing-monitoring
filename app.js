@@ -18,11 +18,7 @@ var path = require('path'),
 	express = require('express'),
 	config = require('./config'),
 	app = express();
-try {
-	config = require('./local');
-}
-catch(e){
-};
+
 
 
 

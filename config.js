@@ -31,7 +31,7 @@ module.exports = {
 
 
   mongodb: {
-    url: 'mongodb://104.155.17.178:27017/mydb',
+    url: 'mongodb://146.148.112.55:27017/mydb',
     collection: 'str-cctv'
   },
   psi: {
