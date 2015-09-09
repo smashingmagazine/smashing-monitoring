@@ -16,16 +16,19 @@ extends base
 block content
 
 
-
+  h1=('PageSpeed für www.stern.de (mobil, mit und ohne GujAd)')
   table.table.table-striped.table-hover
     thead
-      tr: th URL
-          th Score
+      tr: th Score
           th Datum
     tbody
       each site in sites
-        tr: td= site.psiUrl
-            td= site.score
+        tr(class=site.score < 50 ? "slow" : "")
+            td
+               span= ('💻 ' + site.score)
+                   em(title=('PageSpeed für '+ site.related.desktopfalse.url))=site.related.desktopfalse.score
+               span.mobile= ('📱 ' + site.related.mobiletrue.score)
+                   em(title=('PageSpeed für '+ site.related.mobilefalse.url))=site.related.mobilefalse.score
             td(title=moment(site.date).locale('de').format('LLLL')) #{moment(site.date).locale('de').fromNow()}
 
   if !sites.length

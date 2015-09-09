@@ -17,7 +17,19 @@
 var path = require('path'),
 	express = require('express'),
 	config = require('./config'),
-	app = express();
+	app = express(),
+	server,
+	sites = [
+		{'url': 'http://www.stern.de/', 'strategy': 'desktop', 'ads': true, 'related': [
+			{'url': 'http://mobil.stern.de/', 'strategy': 'mobile', 'ads': true},
+			{'url': 'http://www.stern.de/?disableGujAd=1', 'strategy': 'desktop', 'ads': false},
+			{'url': 'http://mobil.stern.de/?disableGujAd=1', 'strategy': 'mobile', 'ads': false}
+		]
+
+
+		}
+
+	];
 
 
 
@@ -35,7 +47,7 @@ var psi = require('./psiScore/psi')(config);
 
 app.get('/',function(req,res){
   res.set('Content-Type', 'text/html');
-  model.list(100, '','http://www.stern.de/',
+  model.list(10000, '','http://www.stern.de/',
     function(err, entities) {
       if (err) return true;
       res.render('list.jade', {
@@ -45,12 +57,6 @@ app.get('/',function(req,res){
   );
 });
 
-/*app.get('/run', function (req, res) {
-  psi.run(model.create);
-  res.status(200).send('ok!');
-});*/
-
-
 // Basic error handler
 app.use(function (err, req, res, next) {
   console.error(err.stack);
@@ -58,14 +64,14 @@ app.use(function (err, req, res, next) {
 });
 
 
-// Start the server
-var server = app.listen(config.port, '0.0.0.0', function () {
+server = app.listen(config.port, '0.0.0.0', function () {
   console.log('App listening at http://%s:%s MongoDB:%s', server.address().address, server.address().port,config.mongodb.url);
   console.log("Press Ctrl+C to quit.");
 });
 
 (function(){
-  setInterval(function() {
-	  psi.run(model.create);
-  },600000);
+	setInterval(function() {
+		psi.run(model.create);
+	},600000);
 })();
+

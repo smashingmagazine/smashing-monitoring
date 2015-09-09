@@ -26,12 +26,12 @@ module.exports = {
     This is the id of your project in the Google Developers Console.
   */
   gcloud: {
-    projectId: 'str-cctv'
+    projectId: 'str-cctv-x'
   },
 
 
   mongodb: {
-    url: 'mongodb://146.148.112.55:27017/mydb',
+    url: 'mongodb://146.148.112.55:27017/mydb-xS',
     collection: 'str-cctv'
   },
   psi: {

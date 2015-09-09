@@ -1,44 +1,80 @@
 /*global require */
-var psi = require('psi');
+var psi = require('psi'),
+	config = require('../config'),
+	model = require('../model/model-mongodb')(config),
+	Promise = require('promise');
 module.exports = function (config) {
-  var sites = [
-    {'url': 'http://www.stern.de/', 'strategy': 'desktop','ads':true},
-    {'url': 'http://mobil.stern.de/', 'strategy': 'mobile','ads':true},
-    {'url': 'http://www.stern.de/?disableGujAd=1', 'strategy': 'desktop','ads':false},
-    {'url': 'http://mobil.stern.de/?disableGujAd=1', 'strategy': 'mobile','ads':false}
-    ],
+	var
+		// cb ist create()
+		related = {},
+		run = function (site,cb) {
+			console.log('run');
+			psi(site.url, {'key': config.psi.key, 'strategy': site.strategy}, function (err, data) {
+				var fn = function (site){ // sample async action
+					return new Promise(function(resolve){
+						psi(site.url, {'key': config.psi.key, 'strategy': site.strategy},function(err,data){
+							data.strategy = site.strategy;
+							data.ads = site.ads;
+							data.url = site.url;
+							data.psiUrl = data.id;
+							delete data.id;
+							related[site.strategy+''+site.ads] = data;
+							resolve();
+						});
+					});
+				};
+				data.psiUrl = data.id;
 
-  run = function (cb) {
-	 console.log('run');
-    sites.forEach(function (site) {
-      psi(site.url, {'key': config.psi.key, 'strategy': site.strategy}, function (err, data) {
-        psiCallback(site, err, data, cb);
-      });
-    });
-  },
-
-
-    psiCallback = function (site, err, data, cb) {
-      if (err) {
-        console.log(site.url + ' ' + err);
-        return;
-      }
-      // http://stackoverflow.com/questions/11486779/formatting-isodate-from-mongodb
-      data.psiUrl = data.id;
-	  delete data.id;
-	  data.date = new Date();
-      data.url = site.url;
-      data.strategy = site.strategy;
-      data.ads = site.ads;
-      cb(data, function () {
-        console.log(data.psiUrl +' saved');
-      });
+				data.related = site.related;
+				delete data.id;
+				data.date = new Date();
+				data.url = site.url;
+				data.strategy = site.strategy;
+				data.ads = site.ads;
 
 
-    },
-    psi = require('psi');
 
-  return {
-    'run': run
-  }
+				if(site.related){
+					console.log('related!');
+					var results = Promise.all(site.related.map(fn)); // pass array of promises
+					results.then(function(){
+						data.related = related;
+						cb(data,function(){
+
+							console.log('Saved');
+						});
+					});
+				}
+
+
+
+
+
+
+
+
+
+
+			});
+
+		};
+
+
+
+			// http://stackoverflow.com/questions/11486779/formatting-isodate-from-mongodb
+
+
+
+
+
+
+
+
+
+
+
+	return {
+		'run': run
+	}
+
 };
