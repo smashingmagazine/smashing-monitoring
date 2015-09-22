@@ -1,9 +1,5 @@
 # Include your project-specific ignores in this file
 # Read about how to use .gitignore: https://help.github.com/articles/ignoring-files
 /.idea
-/node_modules
-/.project
-/test-reports
-/dist
-/local.js
-npm-debug.log
+node_modules
+/aws.json

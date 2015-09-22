@@ -1,0 +1,13 @@
+{
+	"region": "us-east-1",
+	"lambda_params_psi": {
+		"FunctionName": "cctv",
+		"Role": "arn:aws:iam::806424220409:role/upload",
+		"Handler" :"index.handler"
+	},
+	"lambda_params_get": {
+		"FunctionName": "cctv-get",
+		"Role": "arn:aws:iam::806424220409:role/upload",
+		"Handler" :"index.handler"
+	}
+}
