@@ -8,10 +8,15 @@ var jade = require('jade'),
 
 module.exports = function (result, cb) {
 	'use strict';
-	result.sort(function(a,b){
-        return a.date < b.date;
+	var resultArray = [];
+    result.forEach(function(item){
+        resultArray.push(item);
     });
-	jade.renderFile(__dirname + '/views/list.jade', {sites: result,'moment':moment}, function (err, html) {
+    resultArray.sort(function(a,b){
+        //console.log(typeof b.date);
+        return b.date - a.date;
+    });
+	jade.renderFile(__dirname + '/views/list.jade', {sites: resultArray,'moment':moment}, function (err, html) {
 
 		if (err) {
 			cb.fail(err);
