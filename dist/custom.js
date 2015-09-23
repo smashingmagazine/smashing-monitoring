@@ -13,3 +13,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	}, false);
 });*/
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    var span = document.querySelectorAll('.date'),i;
+    for (i = 0; i < span.length; ++i) {
+        console.log();
+        span[i].innerHTML = moment(parseInt(span[i].innerHTML)).fromNow();
+    }
+});

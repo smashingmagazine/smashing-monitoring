@@ -25,7 +25,8 @@ block content
 							td
 								em(title=('PageSpeed für '+ site.related[2].url))=site.related[2].score
 							td
-								span(title=moment(site.date).locale('de').format('LLLL'))=site.date
+								span(title=moment(site.date).locale('de').format('LLLL'))
+								span.date=site.date
 			if !sites.length
 				p No entries found.
 

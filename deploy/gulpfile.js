@@ -4,7 +4,7 @@ var gulp = require('gulp'),
 	concat = require('gulp-concat'),
 	rename = require('gulp-rename'),
 	zip = require('gulp-zip'),
-	s3 = require("gulp-s3"),
+    awspublish = require("gulp-awspublish"),
 	uglify = require('gulp-uglify'),
 	aws = JSON.parse(fs.readFileSync('./aws.json'));
 
@@ -17,12 +17,32 @@ gulp.task('psi', function () {
 });
 
 
-// Bucketname ist nicht nur an einer stelle notiert!
-gulp.task('s3',function(){
-	'use strict';
-	gulp.src('../dist/**')
-		.pipe(s3(aws));
+gulp.task('s3', function() {
+
+    // create a new publisher using S3 options
+    // http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#constructor-property
+    var publisher = awspublish.create({
+        params: {
+            Bucket: 'stern-psi'
+        }
+    });
+
+
+    return gulp.src('../dist/*')
+        // gzip, Set Content-Encoding headers and add .gz extension
+        //.pipe(awspublish.gzip({ ext: '.gz' }))
+        .pipe(publisher.publish())
+        // publisher will add Content-Length, Content-Type and headers specified above
+        // If not specified it will set x-amz-acl to public-read by default
+        //.pipe(publisher.publish(headers))
+
+        // create a cache file to speed up consecutive uploads
+        //.pipe(publisher.cache())
+
+        // print upload updates to console
+        .pipe(awspublish.reporter());
 });
+
 
 
 

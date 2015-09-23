@@ -1,12 +1,11 @@
 {
-	"region": "us-east-1",
-	"lambda_params_psi": {
-		"FunctionName": "cctv",
-		"Role": "arn:aws:iam::806424220409:role/upload",
-		"Handler" :"index.handler"
-	},
-	"key":"AKIAINFWSZAEQ6KIEKBA",
-	"secret":"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",
-		"bucket": "stern-psi"
-
+  "region": "us-east-1",
+  "lambda_params_psi": {
+    "FunctionName": "cctv",
+    "Role": "arn:aws:iam::806424220409:role/upload",
+    "Handler": "index.handler"
+  },
+  "key": "AKIAINFWSZAEQ6KIEKBA",
+  "secret": "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",
+  "bucket": "stern-psi"
 }
