@@ -8,6 +8,9 @@ var jade = require('jade'),
 
 module.exports = function (result, cb) {
 	'use strict';
+	result.sort(function(a,b){
+        return a.date < b.date;
+    });
 	jade.renderFile(__dirname + '/views/list.jade', {sites: result,'moment':moment}, function (err, html) {
 
 		if (err) {
