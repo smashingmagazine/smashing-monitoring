@@ -11,8 +11,8 @@ exports.handler = function (event, context) {
 		row.related.push(data[2]);
 		row.related.push(data[3]);
 		db.put(row,context);
-	}, 'fail': function(){
-		context.fail();
+	}, 'fail': function(err){
+		context.fail(err);
 	}});
 };
 

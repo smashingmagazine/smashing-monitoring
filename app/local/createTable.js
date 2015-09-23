@@ -5,7 +5,7 @@ var AWS = require('aws-sdk'),
 		AttributeDefinitions: [
 			/* required */
 			{
-				AttributeName: 'url', /* required */
+				AttributeName: 'id', /* required */
 				AttributeType: 'S' /* required */
 			},
 			{
@@ -16,7 +16,7 @@ var AWS = require('aws-sdk'),
 		],
 		KeySchema: [
 			{
-				AttributeName: 'url', /* required */
+				AttributeName: 'id', /* required */
 				KeyType: 'HASH' /* required */
 			},
 			{

@@ -1,6 +1,7 @@
 /*global require, module */
 var psi = require('psi'),
 	Promise = require('promise'),
+	shortid = require('shortid'),
 	upload = require('./uploadToS3');
 
 
@@ -30,6 +31,12 @@ module.exports = function (config) {
 						reject(err);
 						return;
 					}
+                    if(typeof data.ruleGroups === 'undefined'){
+                        reject('please patch psi to API Version 2');
+                        return;
+                    }
+                    data.url = data.id;
+					data.id = 'str-'+Date.now()+'-'+shortid.generate();
 
 					data.psiUrl = data.id;
 					data.date = Date.now();
