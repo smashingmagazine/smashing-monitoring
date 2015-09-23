@@ -1,0 +1,34 @@
+extends base
+block content
+	h1=('PageSpeed für stern.de')
+	div.row
+		div
+			table.table.table-striped.table-hover
+				thead
+					tr: th
+						th Desktop
+						th Desktop (ohne Werbung)
+						th Mobile
+						th Mobile (ohne Werbung)
+						th Datum
+				tbody
+					each site, index in sites
+						tr(class=site.score < 50 ? "slow" : "")
+							td=index
+
+							td
+								span(data-screenshot=site.screenshot)= ('💻 ' + site.score)
+							td
+								em(title=('PageSpeed für '+ site.related[1].url))=site.related[1].score
+							td
+								span.mobile= ('📱 ' + site.related[0].score)
+							td
+								em(title=('PageSpeed für '+ site.related[2].url))=site.related[2].score
+							td
+								span(title=moment(site.date).locale('de').format('LLLL'))=site.date
+			if !sites.length
+				p No entries found.
+
+
+	div
+			span Generate at time

@@ -1,29 +1,31 @@
 /*global require, module */
 var psi = require('psi'),
-	Promise = require('promise');
+	Promise = require('promise'),
+	upload = require('./uploadToS3');
 
 
 module.exports = function (config) {
-	var run = function (site,succeed, fail) {
+	'use strict';
+	var run = function (cb) {
 
-
-			psiAllSites(site).done(function (data) {
-				//console.log(success[2].score);
-				succeed(data);
+			psiAllSites(config.sites.stern).done(function (data) {
+				cb.succeed(data);
 			}, function (err) {
-				fail(err);
+				//console.log('error');
+				//console.log(err);
+				cb.fail(err);
 			});
 		},
 
 
-		psiAllSites = function (site) {
-			return Promise.all(site.map(runPsi));
+		psiAllSites = function (sites) {
+			return Promise.all(sites.map(runPsi));
 		},
 
 
 		runPsi = function (site) {
 			return new Promise(function (resolve, reject) {
-				psi(site.url, {'key': config.key, 'strategy': site.strategy}, function (err, data) {
+				psi(site.url, {'key': config.key, 'strategy': site.strategy,'screenshot':true}, function (err, data) {
 					if (err) {
 						reject(err);
 						return;
@@ -34,8 +36,21 @@ module.exports = function (config) {
 					data.url = site.url;
 					data.strategy = site.strategy;
 					data.ads = site.ads;
-					console.log('score ' + data.id+' '+data.score);
-					resolve(data);
+
+
+					data.score = data.ruleGroups.SPEED.score;
+					data.screenshot.data = data.screenshot.data.replace(/_/g,'/');
+					data.screenshot.data = data.screenshot.data.replace(/-/g,'+');
+
+
+					//'
+
+					upload(data.date+site.label+'.jpg',new Buffer(data.screenshot.data, 'base64'),'image/jpeg',function(location){
+						data.screenshot = location;
+						//console.log(location);
+						resolve(data);
+						});
+
 
 				});
 			});
@@ -43,6 +58,6 @@ module.exports = function (config) {
 
 	return {
 		'run': run
-	}
+	};
 
 };

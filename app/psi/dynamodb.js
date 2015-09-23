@@ -1,51 +1,50 @@
 var AWS = require('aws-sdk'),
-	dyn,
 	attr = require('dynamodb-data-types').AttributeValue,
-	tableName = 'str';
+	template = require('./generateTemplate'),
+	db,
+	config = require('./config')();
 
 
-AWS.config.update({region: 'us-east-1'});
-dyn = new AWS.DynamoDB();
 
 
-module.exports = function(data){
-	hey = attr.wrap(data);
-	dyn.putItem(
+
+module.exports = {put: function (data, cb) {
+	'use strict';
+	var item = attr.wrap(data);
+	AWS.config.update({region: 'us-east-1'});
+	db = new AWS.DynamoDB();
+	db.putItem(
 		{
-			"TableName": tableName,
-			"Item": hey
+			'TableName': config.dynamodbTableName,
+			'Item': item
 		}, function (err) {
 			if (err) {
-				console.log(err);
+				cb.fail(err);
 
 			}
 
-		});
-
-};
-
-/*var params = {
-	TableName: tableName,
-	Limit: 10
-
-};
-
-dyn.scan(params, function (err, data) {
-	if (err) {
-		console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
-	} else {
-		console.log("Query succeeded.");
-
-		data.Items.forEach(function (item) {
-
-			console.log(attr.unwrap(item));
+			console.log('entry saved to dynamodb');
+			module.exports.run(cb);
 
 
 		});
+},
+	run: function (cb) {
+		'use strict';
+		AWS.config.update({region: 'us-east-1'});
+		db = new AWS.DynamoDB();
+		db.scan({'TableName': config.dynamodbTableName, 'Limit': 1000}, function (err, data) {
+			if (err) {
+				console.error('Unable to query. Error:', JSON.stringify(err, null, 2));
+			} else {
+				console.log('Query succeeded.');
+				template(data.Items.map(attr.unwrap), cb);
+
+			}
+		});
+
 	}
-});*/
-
-
+};
 
 
 
