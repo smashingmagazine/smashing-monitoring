@@ -8,15 +8,15 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "aws-sdk": "^2.2.4",
     "dynamodb-data-types": "^2.1.0",
-    "promises": "^0.2.5",
-    "psi": "^1.0.6",
-    "sanitize-filename": "^1.4.3"
-  },
-  "devDependencies": {
     "jade": "^1.11.0",
-    "moment": "^2.10.6"
+    "moment": "^2.10.6",
+    "promise": "^7.0.4",
+    "psi": "^1.0.6",
+    "sanitize-filename": "^1.4.3",
+    "shortid": "^2.2.2"
   }
 }

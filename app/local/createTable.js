@@ -27,7 +27,7 @@ var AWS = require('aws-sdk'),
 			/* more items */
 		],
 		ProvisionedThroughput: { /* required */
-			ReadCapacityUnits: 5, /* required */
+			ReadCapacityUnits: 10, /* required */
 			WriteCapacityUnits: 5 /* required */
 		},
 		TableName: config.dynamodbTableName

@@ -38,6 +38,7 @@ module.exports = function (config) {
                     data.url = data.id;
 					data.id = 'str-'+Date.now()+'-'+shortid.generate();
 
+                    delete data.formattedResults;
 					data.psiUrl = data.id;
 					data.date = Date.now();
 					data.url = site.url;
@@ -52,7 +53,7 @@ module.exports = function (config) {
 
 					//'
 
-					upload(data.date+site.label+'.jpg',new Buffer(data.screenshot.data, 'base64'),'image/jpeg',function(location){
+					upload('screenshots/'+data.date+site.label+'.jpg',new Buffer(data.screenshot.data, 'base64'),'image/jpeg',function(location){
 						data.screenshot = location;
 						//console.log(location);
 						resolve(data);
