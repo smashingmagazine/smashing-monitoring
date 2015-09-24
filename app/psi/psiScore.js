@@ -51,10 +51,10 @@ module.exports = function (config) {
 					data.screenshot.data = data.screenshot.data.replace(/-/g,'+');
 
 
-					//'
 
-					upload('screenshots/'+data.date+site.label+'.jpg',new Buffer(data.screenshot.data, 'base64'),'image/jpeg',function(location){
-						data.screenshot = location;
+
+					upload('screenshots/'+data.id+'+.jpg',new Buffer(data.screenshot.data, 'base64'),'image/jpeg',function(location){
+						//sdata.screenshot = location;
 						//console.log(location);
 						resolve(data);
 						});

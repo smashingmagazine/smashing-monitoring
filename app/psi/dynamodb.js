@@ -30,18 +30,40 @@ module.exports = {put: function (data, cb) {
 		});
 },
 	run: function (cb) {
+		var scan = function(){
+			db.scan(query, function (err, data) {
+				if (err) {
+					console.error('Unable to query. Error:', JSON.stringify(err, null, 2));
+				} else {
+					console.log('Query succeeded.');
+					result = result.concat(data.Items);
+					if(data.LastEvaluatedKey){
+						console.log(data.Items.length);
+						query.ExclusiveStartKey = data.LastEvaluatedKey;
+
+						scan(query);
+
+					}
+					else {
+						console.log(result.length);
+						template(result.map(attr.unwrap), cb);
+
+					}
+
+				}
+			});
+		},
+			result = [],
+			query = {'TableName': config.dynamodbTableName};
+
 		'use strict';
 		AWS.config.update({region: 'us-east-1'});
 		db = new AWS.DynamoDB();
-		db.scan({'TableName': config.dynamodbTableName, 'Limit': 1000}, function (err, data) {
-			if (err) {
-				console.error('Unable to query. Error:', JSON.stringify(err, null, 2));
-			} else {
-				console.log('Query succeeded.');
-				template(data.Items.map(attr.unwrap), cb);
 
-			}
-		});
+		scan(query);
+
+
+
 
 	}
 };

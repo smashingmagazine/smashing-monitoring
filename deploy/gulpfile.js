@@ -17,6 +17,13 @@ gulp.task('psi', function () {
 });
 
 
+gulp.task('proxy', function () {
+	'use strict';
+	return gulp.src('../app/gateway-proxy/**/*')
+		.pipe(zip('archive.zip'))
+		.pipe(lambda(aws.lambda_params_proxy, aws));
+});
+
 gulp.task('s3', function() {
 
     // create a new publisher using S3 options
