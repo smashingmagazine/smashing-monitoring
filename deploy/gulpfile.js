@@ -17,12 +17,6 @@ gulp.task('psi', function () {
 });
 
 
-gulp.task('proxy', function () {
-	'use strict';
-	return gulp.src('../app/gateway-proxy/**/*')
-		.pipe(zip('archive.zip'))
-		.pipe(lambda(aws.lambda_params_proxy, aws));
-});
 
 gulp.task('s3', function() {
 
@@ -55,7 +49,7 @@ gulp.task('s3', function() {
 
 gulp.task('js',function(){
 	'use strict';
-	return gulp.src(['../app/bower_components/moment/min/moment.min.js','../app/bower_components/moment/locale/de.js','../dist/custom.js'])
+	return gulp.src(['../app/bower_components/zepto/zepto.js','../app/bower_components/moment/min/moment.min.js','../app/bower_components/moment/locale/de.js','../dist/custom.js'])
 		.pipe(concat('app.js'))
 		.pipe(uglify())
 		.pipe(rename('app.js'))

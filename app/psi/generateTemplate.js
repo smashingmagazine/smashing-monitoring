@@ -1,5 +1,6 @@
 var jade = require('jade'),
 	fs = require('fs'),
+	createCsv = require('./createCsv'),
 	AWS = require('aws-sdk'),
 //http = require('http');
 	moment = require('moment'),
@@ -13,37 +14,33 @@ module.exports = function (result, cb) {
 		item.isoDate = new Date(item.date).toISOString();
         resultArray.push(item);
     });
+
+
+
+
+
     resultArray.sort(function(a,b){
         //console.log(typeof b.date);
         return b.date - a.date;
     });
-	jade.renderFile(__dirname + '/views/list.jade', {sites: resultArray,'moment':moment}, function (err, html) {
-
-		if (err) {
-			cb.fail(err);
-			return;
-		}
-
-		upload('index.html',html,'text/html',function(){
-			cb.succeed('file written');
-		});
 
 
-		/*
+	createCsv(resultArray,function(csvLocation){
 
-		fs.writeFile(__dirname + '/../../dist/index.html', html, function (err) {
+		jade.renderFile(__dirname + '/views/list.jade', {sites: resultArray,'moment':moment,'csvLocation':csvLocation}, function (err, html) {
 
 			if (err) {
-				console.log('jade fail');
 				cb.fail(err);
+				return;
 			}
-			else {
-				console.log('jade file written');
+
+			upload('index.html',html,'text/html',function(){
 				cb.succeed('file written');
-			}
+			});
+
 
 		});
-		*/
-
 	});
+
+
 };

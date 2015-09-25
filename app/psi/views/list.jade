@@ -1,11 +1,12 @@
 extends base
 block content
-	h1=('PageSpeed für stern.de')
-	div.row
-		div
-			table.table.table-striped.table-hover
+	h1 PageSpeed für stern.de
+		a(href='data.csv') 📃
+	div.screenshot
+	table.table.table-striped.table-hover
 				thead
-					tr: th
+					tr
+						th
 						th Desktop
 						th Desktop (ohne Werbung)
 						th Mobile
@@ -16,13 +17,13 @@ block content
 						tr(class=site.score < 50 ? "slow" : "")
 							td=sites.length-index
 
-							td
-								span(data-screenshot=site.screenshot)= ('💻 ' + site.score)
-							td
+							td(data-label=site.label+'-'+site.id)
+								span= ('💻 ' + site.score)
+							td(data-label=site.related[1].label+'-'+site.related[1].id)
 								em(title=('PageSpeed für '+ site.related[1].url))=site.related[1].score
-							td
+							td(data-label=site.related[0].label+'-'+site.related[0].id)
 								span.mobile= ('📱 ' + site.related[0].score)
-							td
+							td(data-label=site.related[2].label+'-'+site.related[2].id)
 								em(title=('PageSpeed für '+ site.related[2].url))=site.related[2].score
 							td
 								span(title=moment(site.date).locale('de').format('LLLL'))

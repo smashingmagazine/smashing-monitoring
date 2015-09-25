@@ -1,7 +1,16 @@
-.psi-table {
-	float:left;
-}
+
 .screenshot {
-	float:right;
-	width:400px;
+	position: fixed;
+	right:20px;
+	bottom:20px;
+	width: 320px;
+	height: 240px;
+	background:transparent;
+}
+h1 a {
+	padding: 10px;
+	margin:5px;
+}
+h1 a:hover {
+	text-decoration: none;
 }

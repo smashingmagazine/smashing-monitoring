@@ -2,6 +2,7 @@
 var psi = require('psi'),
 	Promise = require('promise'),
 	shortid = require('shortid'),
+
 	upload = require('./uploadToS3');
 
 
@@ -11,6 +12,9 @@ module.exports = function (config) {
 
 			psiAllSites(config.sites.stern).done(function (data) {
 				cb.succeed(data);
+
+
+
 			}, function (err) {
 				//console.log('error');
 				//console.log(err);
@@ -46,7 +50,7 @@ module.exports = function (config) {
 					data.url = site.url;
 					data.strategy = site.strategy;
 					data.ads = site.ads;
-
+					data.label = site.label;
 
 					data.score = data.ruleGroups.SPEED.score;
 					data.screenshot.data = data.screenshot.data.replace(/_/g,'/');
@@ -55,7 +59,7 @@ module.exports = function (config) {
 
 
 
-					upload('screenshots/'+site.label+'-'+id+'+.jpg',new Buffer(data.screenshot.data, 'base64'),'image/jpeg',function(location){
+					upload('screenshots/'+data.label+'-'+id+'.jpg',new Buffer(data.screenshot.data, 'base64'),'image/jpeg',function(location){
 						delete data.screenshot;
 						//console.log(location);
 						resolve(data);
