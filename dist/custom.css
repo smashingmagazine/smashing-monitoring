@@ -6,6 +6,7 @@
 	width: 320px;
 	height: 240px;
 	background:transparent;
+	box-shadow: 3px 10px 10px #333;
 }
 h1 a {
 	padding: 10px;

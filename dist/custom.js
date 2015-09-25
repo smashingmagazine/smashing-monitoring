@@ -21,7 +21,7 @@
 			timeAgo = function(){
 				$date.each(function () {
 					var $element = $(this);
-					$element.text(moment($element.text()).fromNow());
+					$element.text(moment($element.attr('data-date')).fromNow());
 				});
 
 			},
