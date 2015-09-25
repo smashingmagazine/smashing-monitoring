@@ -1,4 +1,4 @@
-/*global Zepto, document, console, moment */
+/*global window, Zepto, document, console, moment */
 
 /*
 
@@ -13,20 +13,25 @@
 
  }, false);
  });*/
-(function (document, $, moment) {
+(function (window,document, $, moment) {
 	'use strict';
 	$('ready', function () {
 		var $img,
+		$date = $('.date'),
+			timeAgo = function(){
+				$date.each(function () {
+					var $element = $(this);
+					$element.text(moment($element.text()).fromNow());
+				});
+
+			},
 			lastSrc;
 		$('.screenshot').append('<img />');
 		$img  = $('.screenshot img');
 		$img.on('load',function(){
 
 		});
-		$('.date').each(function () {
-			var $element = $(this);
-			$element.text(moment($element.text()).fromNow());
-		});
+
 
 		$('[data-label]').on('mouseover', function () {
 			var $element = $(this),
@@ -36,8 +41,11 @@
 					lastSrc = src;
 				}
 		});
+		window.setInterval(timeAgo,1000);
+
+
 
 	});
 
 
-})(document, Zepto, moment);
+})(window,document, Zepto, moment);
