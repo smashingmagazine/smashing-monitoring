@@ -6,7 +6,6 @@ block content
 	table.table.table-striped.table-hover
 				thead
 					tr
-						th
 						th Desktop
 						th Desktop (ohne Werbung)
 						th Mobile
@@ -15,8 +14,6 @@ block content
 				tbody
 					each site, index in sites
 						tr(class=site.score < 50 ? "slow" : "")
-							td=sites.length-index
-
 							td(data-label=site.label+'-'+site.id)
 								span= ('💻 ' + site.score)
 							td(data-label=site.related[1].label+'-'+site.related[1].id)
