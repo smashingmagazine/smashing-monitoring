@@ -14,7 +14,7 @@ block content
 				tbody
 					each site, index in sites
 						tr(class=site.score < 50 ? "slow" : "")
-							td=index
+							td=sites.length-index
 
 							td
 								span(data-screenshot=site.screenshot)= ('💻 ' + site.score)
@@ -26,7 +26,7 @@ block content
 								em(title=('PageSpeed für '+ site.related[2].url))=site.related[2].score
 							td
 								span(title=moment(site.date).locale('de').format('LLLL'))
-								span.date=site.date
+								span.date=site.isoDate
 			if !sites.length
 				p No entries found.
 

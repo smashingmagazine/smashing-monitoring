@@ -10,6 +10,7 @@ module.exports = function (result, cb) {
 	'use strict';
 	var resultArray = [];
     result.forEach(function(item){
+		item.isoDate = new Date(item.date).toISOString();
         resultArray.push(item);
     });
     resultArray.sort(function(a,b){

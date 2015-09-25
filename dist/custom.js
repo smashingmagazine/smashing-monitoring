@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener("DOMContentLoaded", function() {
     var span = document.querySelectorAll('.date'),i;
     for (i = 0; i < span.length; ++i) {
-        console.log();
-        span[i].innerHTML = moment(parseInt(span[i].innerHTML),'x').fromNow();
+        span[i].innerHTML = moment(span[i].innerHTML).fromNow();
     }
 });

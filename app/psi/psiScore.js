@@ -27,7 +27,9 @@ module.exports = function (config) {
 		runPsi = function (site) {
 			return new Promise(function (resolve, reject) {
 				psi(site.url, {'key': config.key, 'strategy': site.strategy,'screenshot':true}, function (err, data) {
-					if (err) {
+					var date = Date.now(),
+                        id = 'str-'+date+'-'+shortid.generate();
+                    if (err) {
 						reject(err);
 						return;
 					}
@@ -36,11 +38,11 @@ module.exports = function (config) {
                         return;
                     }
                     data.url = data.id;
-					data.id = 'str-'+Date.now()+'-'+shortid.generate();
+					data.id = id;
 
                     delete data.formattedResults;
 					data.psiUrl = data.id;
-					data.date = Date.now();
+					data.date = date;
 					data.url = site.url;
 					data.strategy = site.strategy;
 					data.ads = site.ads;
@@ -48,13 +50,13 @@ module.exports = function (config) {
 
 					data.score = data.ruleGroups.SPEED.score;
 					data.screenshot.data = data.screenshot.data.replace(/_/g,'/');
-					data.screenshot.data = data.screenshot.data.replace(/-/g,'+');
 
 
 
 
-					upload('screenshots/'+data.id+'+.jpg',new Buffer(data.screenshot.data, 'base64'),'image/jpeg',function(location){
-						//sdata.screenshot = location;
+
+					upload('screenshots/'+site.label+'-'+id+'+.jpg',new Buffer(data.screenshot.data, 'base64'),'image/jpeg',function(location){
+						delete data.screenshot;
 						//console.log(location);
 						resolve(data);
 						});
