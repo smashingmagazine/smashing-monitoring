@@ -44,7 +44,7 @@ module.exports = function (result, cb) {
 				});
 
 				gbuf.gzip(html, function(zipped){
-					upload('index.html',zipped, 'text/html', function () {
+					upload('index.html',zipped, 'text/html','gzip', function () {
 						cb.succeed('file written');
 					});// result, so just send it.
 				});

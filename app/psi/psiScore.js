@@ -59,7 +59,7 @@ module.exports = function (config) {
 
 
 
-					upload('screenshots/'+data.label+'-'+id+'.jpg',new Buffer(data.screenshot.data, 'base64'),'image/jpeg',function(location){
+					upload('screenshots/'+data.label+'-'+id+'.jpg',new Buffer(data.screenshot.data, 'base64'),'','image/jpeg',function(location){
 						delete data.screenshot;
 						//console.log(location);
 						resolve(data);
