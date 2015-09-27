@@ -17,8 +17,8 @@ module.exports = function (data, cb) {
 			cb();
 
 		}
-		upload('data.csv', csv, 'text/csv', function (location) {
-			console.log('upload done');
+		upload('data.csv', csv, 'text/csv', '',function () {
+			console.log('csv upload done');
 			cb();
 		});
 
