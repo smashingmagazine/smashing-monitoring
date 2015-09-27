@@ -8,10 +8,14 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "prettysize": "0.0.3"
+  },
   "devDependencies": {
     "aws-sdk": "^2.2.4",
     "dynamodb-data-types": "^2.1.0",
+    "gzipme": "0.0.9",
+    "html-minifier": "^0.8.0",
     "jade": "^1.11.0",
     "json2csv": "^2.12.0",
     "moment": "^2.10.6",

@@ -1,6 +1,6 @@
 extends base
 block content
-	h1 PageSpeed für stern.de
+	h1 PageSpeed Monitoring
 		a(href='data.csv') 📃
 	div.screenshot
 	table.table.table-striped.table-hover
@@ -13,13 +13,15 @@ block content
 						th Datum
 				tbody
 					each site, index in sites
-						tr(class=site.score < 50 ? "slow" : "")
-							td(data-label=site.label+'-'+site.id)
-								span= ('💻 ' + site.score)
+						tr
+							td(class=site.score < 50 ? "slow" : "",data-label=site.label+'-'+site.id)
+								i 💻
+								span= site.score
 							td(data-label=site.related[1].label+'-'+site.related[1].id)
 								em(title=('PageSpeed für '+ site.related[1].url))=site.related[1].score
-							td(data-label=site.related[0].label+'-'+site.related[0].id)
-								span.mobile= ('📱 ' + site.related[0].score)
+							td(class=site.related[0].score < 50 ? "slow" : "",data-label=site.related[0].label+'-'+site.related[0].id)
+								i 📱
+								span.mobile= (site.related[0].score)
 							td(data-label=site.related[2].label+'-'+site.related[2].id)
 								em(title=('PageSpeed für '+ site.related[2].url))=site.related[2].score
 							td

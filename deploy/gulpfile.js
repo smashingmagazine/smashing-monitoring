@@ -4,6 +4,7 @@ var gulp = require('gulp'),
 	concat = require('gulp-concat'),
 	rename = require('gulp-rename'),
 	zip = require('gulp-zip'),
+    minifyCss = require('gulp-minify-css'),
     awspublish = require("gulp-awspublish"),
 	uglify = require('gulp-uglify'),
 	aws = JSON.parse(fs.readFileSync('./aws.json'));
@@ -17,6 +18,13 @@ gulp.task('psi', function () {
 });
 
 
+
+gulp.task('proxy', function () {
+	'use strict';
+	return gulp.src('../app/gateway-proxy/**/*')
+		.pipe(zip('archive.zip'))
+		.pipe(lambda(aws.lambda_params_proxy, aws));
+});
 
 gulp.task('s3', function() {
 
@@ -49,9 +57,20 @@ gulp.task('s3', function() {
 
 gulp.task('js',function(){
 	'use strict';
-	return gulp.src(['../app/bower_components/zepto/zepto.js','../app/bower_components/moment/min/moment.min.js','../app/bower_components/moment/locale/de.js','../dist/custom.js'])
+	return gulp.src(['../app/bower_components/zepto/zepto.js','../app/bower_components/moment/min/moment.min.js','../app/bower_components/moment/locale/de.js','../app/frontend-src/custom.js'])
 		.pipe(concat('app.js'))
 		.pipe(uglify())
 		.pipe(rename('app.js'))
-		.pipe(gulp.dest('../dist/'));
+		.pipe(gulp.dest('../app/psi/view'));
+});
+
+
+
+gulp.task('css',function(){
+	'use strict';
+	return gulp.src(['../app/bower_components/bootstrap/dist/css/bootstrap.css','../app/frontend-src/custom.css'])
+        .pipe(concat('app.css'))
+        .pipe(minifyCss())
+		.pipe(rename('app.css'))
+		.pipe(gulp.dest('../app/psi/views'));
 });
