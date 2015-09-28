@@ -5,9 +5,7 @@ var jade = require('jade'),
 	minify = require('html-minifier').minify,
 	moment = require('moment'),
 	gbuf = require('gzip-buffer'),
-	//zlib = require("zlib"),
-	//zipper = zlib.createGzip(),
-	//Buffer = require('buffer').Buffer,
+
 	upload = require('./uploadToS3');
 
 
@@ -43,10 +41,12 @@ module.exports = function (result, cb) {
 					removeAttributeQuotes: true
 				});
 
+				fs.writeFile('dist/lokal.html',html,function(){});
+
 				gbuf.gzip(html, function(zipped){
 					upload('index.html',zipped, 'text/html','gzip', function () {
 						cb.succeed('file written');
-					});// result, so just send it.
+					});
 				});
 
 
