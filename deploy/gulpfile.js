@@ -57,18 +57,18 @@ gulp.task('s3', function() {
 
 gulp.task('js',function(){
 	'use strict';
-	return gulp.src(['../app/bower_components/zepto/zepto.js','../app/bower_components/moment/min/moment.min.js','../app/bower_components/moment/locale/de.js','../app/frontend-src/custom.js'])
+	return gulp.src(['../app/bower_components/zepto/zepto.js','../app/bower_components/moment/min/moment.min.js','../app/bower_components/moment/locale/de.js','../app/bower_components/chartist/dist/chartist.js','../app/frontend-src/custom.js'])
 		.pipe(concat('app.js'))
 		.pipe(uglify())
 		.pipe(rename('app.js'))
-		.pipe(gulp.dest('../app/psi/view'));
+		.pipe(gulp.dest('../app/psi/views'));
 });
 
 
 
 gulp.task('css',function(){
 	'use strict';
-	return gulp.src(['../app/bower_components/bootstrap/dist/css/bootstrap.css','../app/frontend-src/custom.css'])
+	return gulp.src(['../app/bower_components/bootstrap/dist/css/bootstrap.css','../app/bower_components/chartist/dist/chartist.min.css','../app/frontend-src/custom.css'])
         .pipe(concat('app.css'))
         .pipe(minifyCss())
 		.pipe(rename('app.css'))

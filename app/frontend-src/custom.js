@@ -25,7 +25,7 @@
 
         $('[data-label]').on('mouseover', function () {
             var $element = $(this),
-                src = 'screenshots/' + $element.attr('data-label') + '.jpg';
+                src = 'https://s3-us-west-2.amazonaws.com/stern-psi/screenshots/' + $element.attr('data-label') + '.jpg';
             $img.addClass('show');
             if (lastSrc !== src) {
                 $img.attr('src', src);
@@ -37,6 +37,17 @@
         window.setInterval(timeAgo, 1000);
 
 
+    });
+
+
+    new Chartist.Line('.ct-chart', {
+        'labels': labels,
+        'series': [series]
+    }, {
+        fullWidth: true,
+        chartPadding: {
+            right: 40
+        }
     });
 
 
