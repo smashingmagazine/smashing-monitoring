@@ -30,7 +30,7 @@ var AWS = require('aws-sdk'),
 			ReadCapacityUnits: 3, /* required */
 			WriteCapacityUnits: 3 /* required */
 		},
-		TableName: config.dynamodbTableName
+		TableName: 'stern_de'
 
 
 
