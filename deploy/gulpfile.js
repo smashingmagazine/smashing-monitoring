@@ -61,7 +61,7 @@ gulp.task('js',function(){
 		.pipe(concat('app.js'))
 		.pipe(uglify())
 		.pipe(rename('app.js'))
-		.pipe(gulp.dest('../app/psi/views'));
+		.pipe(gulp.dest('../app/psi/neu/template/assets'));
 });
 
 
@@ -72,5 +72,5 @@ gulp.task('css',function(){
         .pipe(concat('app.css'))
         .pipe(minifyCss())
 		.pipe(rename('app.css'))
-		.pipe(gulp.dest('../app/psi/views'));
+		.pipe(gulp.dest('../app/psi/neu/template/assets'));
 });

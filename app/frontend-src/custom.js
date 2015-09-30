@@ -1,4 +1,4 @@
-/*global window, Zepto, document, console, moment */
+/*global window, Zepto, document, console, moment, Chartist,series,labels */
 
 (function (window, document, $, moment) {
     'use strict';
@@ -23,9 +23,9 @@
         });
 
 
-        $('[data-label]').on('mouseover', function () {
+        $('[data-screenshot]').on('mouseover', function () {
             var $element = $(this),
-                src = 'https://s3-us-west-2.amazonaws.com/stern-psi/screenshots/' + $element.attr('data-label') + '.jpg';
+                src = $element.attr('data-screenshot');
             $img.addClass('show');
             if (lastSrc !== src) {
                 $img.attr('src', src);

@@ -3,22 +3,15 @@ var Promise = require('promise'),
 	upload = require('./uploadToAmazonS3');
 
 
-
-module.exports = function (filename,html) {
+module.exports = function (data) {
 	'use strict';
 
 	return new Promise(function (fulfill, reject) {
-
-
 		// filename, image, encoding, mime, callback
-		upload(filename, html, 'text/html','gzip', function (err) {
-			if(err){
-				reject(err);
-			}
-			else {
-				fulfill('yo yo, template upload done');
-			}
-		});
+		upload('data.csv', data, 'text/csv','gzip', function () {
+			console.log('csv upload done');
+			fulfill('csv upload done');
+		}, reject);
 	});
 };
 
