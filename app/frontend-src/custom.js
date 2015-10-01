@@ -40,9 +40,9 @@
     });
 
 
-    new Chartist.Line('.ct-chart', {
+    Chartist.Line('.ct-chart', {
         'labels': labels,
-        'series': [series]
+        'series': series
     }, {
         fullWidth: true,
         chartPadding: {

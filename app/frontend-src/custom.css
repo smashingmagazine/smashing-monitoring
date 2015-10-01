@@ -34,7 +34,9 @@ h1:before {
     from { opacity: 0; }
     to   { opacity: 1; }
 }
-
+th span {
+	padding: 2px;
+}
 td span {
     padding: 3px;
     margin : 3px;
@@ -72,4 +74,27 @@ h1 a:hover {
 }
 .ct-label {
     font-size:1.4rem;
+}
+.ct-line,.ct-point {
+	stroke-width: 2px;
+	}
+/* desktop */
+.series-a span,.ct-series-a .ct-line,.ct-series-a .ct-point {
+	background: #c00;
+	stroke: #c00;
+}
+/* desktop ohne werbung */
+.series-b span,.ct-series-b .ct-line,.ct-series-b .ct-point {
+	background: #96F734;
+	stroke: #96F734;
+}
+/* mobile */
+.series-c span,.ct-series-c .ct-line,.ct-series-c .ct-point {
+	background: #fff;
+	stroke: #fff;
+}
+/* mobile ohne werbung */
+.series-d span,.ct-series-d .ct-line,.ct-series-d .ct-point {
+	background: #5FA31A;
+	stroke: #5FA31A;
 }

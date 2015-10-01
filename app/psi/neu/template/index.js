@@ -48,8 +48,7 @@ module.exports = function (data) {
 				'css': css,
 				'js': js,
 				'labels':chartist.labels,
-				'seriesMobile':chartist.seriesMobile,
-				'seriesDesktop':chartist.seriesDesktop,
+				'series': chartist.series,
 				sites: data,
 				'moment': moment,
 				'csvLocation': csvLocation

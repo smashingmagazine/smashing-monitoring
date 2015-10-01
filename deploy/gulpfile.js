@@ -27,7 +27,7 @@ gulp.task('proxy', function () {
 });
 
 gulp.task('s3', function() {
-
+	'use strict';
     // create a new publisher using S3 options
     // http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#constructor-property
     var publisher = awspublish.create({
