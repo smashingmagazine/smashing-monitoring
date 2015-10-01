@@ -10,9 +10,7 @@ module.exports = function (site,data) {
 		var date = Date.now(),
 			id = 'str-' + date + '-' + shortid.generate();
 
-		if (typeof data.ruleGroups === 'undefined') {
-			reject('please patch psi to API Version 2');
-		}
+	
 		delete data.formattedResults;
 
 		if(data.title ===''){

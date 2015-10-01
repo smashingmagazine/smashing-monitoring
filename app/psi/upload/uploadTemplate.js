@@ -11,12 +11,12 @@ module.exports = function (filename,html) {
 
 
 		// filename, image, encoding, mime, callback
-		upload(filename, html, 'text/html','gzip', function (err) {
+		upload(filename, html, 'text/html','gzip', function (err,data) {
 			if(err){
 				reject(err);
 			}
 			else {
-				fulfill('yo yo, template upload done');
+				fulfill('yo yo, template upload done: '+data.Location);
 			}
 		});
 	});

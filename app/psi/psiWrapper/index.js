@@ -8,6 +8,9 @@ module.exports = function (site) {
 			if(err){
 				reject(err);
 			}
+			if (typeof res.ruleGroups === 'undefined') {
+				reject('please patch psi to API Version 2');
+			}
 			else {
 				console.log('psi: '+res.id +' ('+res.ruleGroups.SPEED.score+')');
 				fulfill(res);
