@@ -1,6 +1,6 @@
 var Promise = require('promise'),
 	AWS = require('aws-sdk'),
-	config = require('../config')(),
+	config = require('../../../config')(),
 	attr = require('dynamodb-data-types').AttributeValue,
 	db;
 

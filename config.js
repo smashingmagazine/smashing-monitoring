@@ -2,7 +2,7 @@
 module.exports = function () {
 	'use strict';
 	return {
-		'key': 'AIzaSyCWbyD03vYEPzDPX9TYJaU-X7Zm3BMbMF8',
+		'key': 'AIzaSyBj4Ayjtf-mQo5MLbIxc-Qs_lWBI12BzZI',
 		'bucketName':'stern-psir',
 		'region':'us-east-1',
 		'dynamodbTableName': 'stern_de',

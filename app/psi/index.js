@@ -1,4 +1,4 @@
-var config = require('./config')(),
+var config = require('../../config')(),
 	psi = require('./psiWrapper'),
 	Promise = require('promise'),
 	csv = require('./csv'),
