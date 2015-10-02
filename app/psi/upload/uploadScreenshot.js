@@ -8,7 +8,7 @@ module.exports = function (site) {
 
 	return new Promise(function (fulfill, reject) {
 		// filename, image, encoding, mime, callback
-		upload(site.filename, new Buffer(site.data.screenshot.data, 'base64'), 'image/jpeg','', function () {
+		upload.send(site.filename, new Buffer(site.data.screenshot.data, 'base64'), 'image/jpeg','', function () {
 			delete site.data.screenshot;
 			console.log('upload done: '+site.filename);
 			fulfill(site);

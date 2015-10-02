@@ -1,12 +1,9 @@
 var Promise = require('promise'),
 	AWS = require('aws-sdk'),
-	config = require('../../../config')(),
 	attr = require('dynamodb-data-types').AttributeValue,
-	db;
+	db,
+	config;
 
-
-AWS.config.update({region: config.region});
-db = new AWS.DynamoDB();
 
 
 module.exports = {
@@ -31,6 +28,12 @@ module.exports = {
 					}
 				});
 		});
+	},
+	init:function(c){
+		'use strict';
+		config = c;
+		AWS.config.update({region: config.region});
+		db = new AWS.DynamoDB();
 	},
 	getSites: function () {
 		'use strict';
