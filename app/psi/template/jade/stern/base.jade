@@ -1,0 +1,16 @@
+doctype html
+html(lang="en")
+    head
+        title stern pagespeed
+        meta(charset='utf-8')
+        link(rel='shortcut icon', href='favicon.ico', type='image/x-icon')
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        style.
+            !{css}
+
+    body
+
+        .container
+            block content
+        script.
+            var series = [[!{series.desktop}],[!{series.desktopWithout}],[!{series.mobile}],[!{series.mobileWithout}]];var labels = [!{labels}]; !{js}

@@ -1,5 +1,5 @@
 /*global require */
-var Promise = require('Promise'),
+var Promise = require('promise'),
 	gzip = require('gzip-buffer');
 
 module.exports = function (str) {

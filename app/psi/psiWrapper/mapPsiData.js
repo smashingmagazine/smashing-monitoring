@@ -5,7 +5,7 @@ var Promise = require('promise'),
 module.exports = function (site,data) {
 	'use strict';
 
-	return new Promise(function (fulfill, reject) {
+	return new Promise(function (fulfill) {
 
 		var date = Date.now(),
 			id = 'str-' + date + '-' + shortid.generate();

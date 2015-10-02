@@ -1,0 +1,24 @@
+extends base
+block content
+	h1 PageSpeed Monitoring
+		a(href='data.csv') CSV 📃
+	div.screenshot
+	div.ct-chart
+	table.table.table-striped.table-hover
+				thead
+					tr
+						th.series-a
+							span www.stern.de
+						th.series-b
+							span werbefrei
+						th.series-c
+							span mobile.stern.de
+						th.series-d
+							span werbefrei
+						th
+				tbody
+					include row
+			if !sites.length
+				p No entries found.
+
+

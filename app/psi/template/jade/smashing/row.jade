@@ -1,0 +1,5 @@
+each site, index in sites
+	tr
+		td(class=site.score < 50 ? "slow" : "",data-screenshot=site.filename)
+			i 💻
+			span= site.score

@@ -1,5 +1,5 @@
 var Promise = require('promise'),
-	config = {key: 'AIzaSyCWbyD03vYEPzDPX9TYJaU-X7Zm3BMbMF8'},
+	config = require('../config'),
 	psi = require('psi');
 module.exports = function (site) {
 	'use strict';
@@ -8,7 +8,7 @@ module.exports = function (site) {
 			if(err){
 				reject(err);
 			}
-			if (typeof res.ruleGroups === 'undefined') {
+			else if (typeof res.ruleGroups === 'undefined') {
 				reject('please patch psi to API Version 2');
 			}
 			else {

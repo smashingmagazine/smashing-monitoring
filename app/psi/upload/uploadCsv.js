@@ -1,11 +1,10 @@
-/*global require, Buffer */
+/*global require */
 var Promise = require('promise'),
 	upload = require('./uploadToAmazonS3');
 
 
 module.exports = function (data) {
 	'use strict';
-
 	return new Promise(function (fulfill, reject) {
 		// filename, image, encoding, mime, callback
 		upload('data.csv', data, 'text/csv','gzip', function () {

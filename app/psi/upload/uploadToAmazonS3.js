@@ -1,6 +1,6 @@
 var AWS = require('aws-sdk'),
 	Promise = require('promise'),
-	config = require('./config')();
+	config = require('../config');
 
 module.exports = function (filename, content, contentType, contentEncoding, cb) {
 	'use strict';

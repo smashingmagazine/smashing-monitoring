@@ -1,0 +1,15 @@
+each site, index in sites
+	tr
+		td(class=site.score < 50 ? "slow" : "",data-screenshot=site.filename)
+			i 💻
+			span= site.score
+		td(data-screenshot=site.related['desktop-without-ads'].filename)
+			em(title=('PageSpeed für '+ site.related['desktop-without-ads'].url))=site.related['desktop-without-ads'].score
+		td(class=site.related['mobile-with-ads'].score < 50 ? "slow" : "",data-screenshot=site.related['mobile-with-ads'].filename)
+			i 📱
+			span.mobile= (site.related['mobile-with-ads'].score)
+		td(data-screenshot=site.related['mobile-without-ads'].filename)
+			em(title=('PageSpeed für '+ site.related['mobile-without-ads'].url))=site.related['mobile-without-ads'].score
+		td
+			span(title=moment(site.date).locale('de').format('LLLL'))
+			span.date(data-date=site.isoDate)=site.isoDate

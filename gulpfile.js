@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+	config = require('./app/psi/config.js'),
 	lambda = require('gulp-awslambda'),
 	fs = require('fs'),
 	concat = require('gulp-concat'),
@@ -32,7 +33,7 @@ gulp.task('s3', function() {
     // http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#constructor-property
     var publisher = awspublish.create({
         params: {
-            Bucket: 'stern-psir'
+            Bucket: config.bucketName
         }
     });
 

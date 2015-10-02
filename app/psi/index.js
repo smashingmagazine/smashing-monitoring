@@ -1,36 +1,42 @@
-var config = require('./config')(),
+var config = require('./config'),
 	psi = require('./psiWrapper'),
 	Promise = require('promise'),
 	csv = require('./csv'),
-	dynamoDb = require('./database/dynamoDb').init(config),
+	dynamoDb = require('./database/dynamoDb'),
 	mapPsiData = require('./psiWrapper/mapPsiData'),
 	mapRelated = require('./psiWrapper/mapRelated'),
 	template = require('./template'),
 	uploadTemplate = require('./upload/uploadTemplate'),
 	uploadCsv = require('./upload/uploadCsv'),
+	dataMapping = require('./dataMapping'),
 	compress = require('./compress'),
 	uploadScreenshot = require('./upload/uploadScreenshot');
 
 
+dynamoDb.init(config);
+
 exports.handler = function (event, context) {
 	'use strict';
-	var sites = [
-			{'label': 'desktop-with-ads', 'url': 'http://www.stern.de/', 'strategy': 'desktop', 'ads': true},
-			{'label': 'mobile-with-ads', 'url': 'http://mobil.stern.de/', 'strategy': 'mobile', 'ads': true},
-			{'label': 'desktop-without-ads', 'url': 'http://www.stern.de/?disableGujAd=1', 'strategy': 'desktop', 'ads': false},
-			{'label': 'mobile-without-ads', 'url': 'http://mobil.stern.de/?disableGujAd=1', 'strategy': 'mobile', 'ads': false}
-		],
+	var tenants = config.tenants,
 
 
-		runAllSites = function (sites) {
-			return Promise.all(sites.map(runSite));
+		runAllSites = function (tenant) {
+			return Promise.all(function(){
+				var arr = [];
+
+				tenant.sites.forEach(function(site){
+					arr.push(runSite(tenant.tenantName,site));
+				});
+				return arr;
+
+			}());
 		},
 
 
-		runSite = function (site) {
-			return new Promise(function (resolve, reject) {
+		runSite = function (name,site) {
+			return new Promise(function (resolve) {
 				psi(site)
-					// Ergebnis mappen (müsste kein Promise haben
+					// Ergebnis mappen (müsste kein Promise haben)
 					.then(function (data) {
 						return mapPsiData(site, data);
 					})
@@ -47,7 +53,9 @@ exports.handler = function (event, context) {
 		};
 
 
-	runAllSites(sites).done(function (data) {
+
+	runAllSites(tenants[0]).done(function (data) {
+		var tenantName = tenants[0].tenantName;
 		data = mapRelated(data);
 		// Ergebnis speichern
 		dynamoDb.saveSite(data)
@@ -59,30 +67,29 @@ exports.handler = function (event, context) {
 				.then(compress)
 				.then(uploadCsv);
 				return new Promise.resolve(data);
+			},function(){
+				console.log('noooo');
 			})
-			// Template erzeugen
-			.then(template)
+			.then(function(data){
+				template.rows(tenantName,dataMapping.getLastRow(data)).then(compress).then(function(rows){
+					uploadTemplate('rows.html', rows);
+				},function(err){
+					console.log(err);
+				});
+				return template.index(tenantName,data);
+		},function(err){
+			console.log(err);
+		})
+
 			// gzippen
 			.then(compress)
 			// zu S3 hochladen
 			.then(function (html) {
 				return uploadTemplate('index.html', html);
 			})
-
-			.then(function (msg) {
-				console.log(msg);
-			}, function (err) {
-				console.log('damn');
-				console.log(err);
-			});
-
-
-	}, function (err) {
-		console.log(err);
-	});
+			.then(context.succeed, context.fail);
+	},context.fail);
 
 
 };
 
-// debug
-exports.handler();

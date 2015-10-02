@@ -10,12 +10,14 @@ module.exports = function (filename,html) {
 	return new Promise(function (fulfill, reject) {
 
 
-		// filename, image, encoding, mime, callback
-		upload(filename, html, 'text/html','gzip', function (err,data) {
+		// filename, data, encoding, mime, callback
+		upload(filename, html, 'text/html;charset=utf-8','gzip', function (err,data) {
 			if(err){
+				console.log('upload '+filename+' error');
 				reject(err);
 			}
 			else {
+				console.log(filename+' uploaded');
 				fulfill('yo yo, template upload done: '+data.Location);
 			}
 		});

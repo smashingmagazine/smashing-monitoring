@@ -21,7 +21,6 @@
 		.then(function (msg) {
 			console.log(msg);
 		}, function (err) {
-			console.log('damn');
 			console.log(err);
 		});
 })();
