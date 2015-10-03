@@ -23,32 +23,77 @@ var jade = require('jade'),
 	readFiles = function (filenames) {
 		'use strict';
 		return Promise.all(filenames.map(readFile));
-	};
+    },
+    getChartistMapper = function(tenant){
+        try{
+            return require('./mappingForChartist/'+tenant);
+        }
+        catch(e){
+            return require('./mappingForChartist/default/')
+        }
+    };
 
 module.exports = {
-	'rows' : function(tenant,rows){
+	'rows' : function(rows){
 		'use strict';
 		return new Promise(function (fulfill, reject) {
-			jade.renderFile('./template/jade/'+tenant+'/row.jade',{'sites':rows,'moment':moment},function(err,row){
-				if(err){
-					reject(err);
-				}
-				else {
-					console.log('row rendered');
-					fulfill(row);
-				}
-			});
+
+            var templateDir = './template/jade/'+rows.tenant,
+                render = function(){
+                    jade.renderFile(templateDir+'/row.jade',{'sites':rows.slice(3),'moment':moment},function(err,row){
+                        if(err){
+                            reject(err);
+                        }
+                        else {
+                            console.log('row rendered');
+                            fulfill(row);
+                        }
+                    });
+                };
+            fs.readdir(templateDir,function(err){
+                if(err){
+                    templateDir = './template/jade/default';
+                }
+                render();
+            });
+
+
+
 		});
 
 	},
 	'index': function (tenant,data) {
 		'use strict';
-		return new Promise(function (fulfill, reject) {
+        return new Promise(function (fulfill, reject) {
 			readFiles(['./template/assets/app.css', './template/assets/app.js']).done(function (assets) {
 				var css = assets[0],
 					js = assets[1],
 					csvLocation = 'data.csv',
-					chartist = require('./mapDataForChartist')(data);
+					chartist = getChartistMapper(tenant)(data),
+                    templateDir = './template/jade/'+data.tenant,
+                    render = function(){
+                        jade.renderFile(templateDir+'/list.jade', {
+                            'css': css,
+                            'js': js,
+                            'labels': chartist.labels,
+                            'series': chartist.series,
+                            sites: data,
+                            'moment': moment,
+                            'csvLocation': csvLocation
+                        }, function (err, html) {
+                            if (err) {
+                                console.log('jade error');
+                                reject(err);
+                            }
+                            else {
+                                html = minify(html, {
+                                    removeAttributeQuotes: true
+                                });
+                                //console.log('jade success');
+                                fulfill(html);
+                            }
+                        })
+                    };
 
 
 				// Iso Date hinzufügen
@@ -56,27 +101,17 @@ module.exports = {
 				data.sort(function (a, b) {
 					return b.date - a.date;
 				});
-				jade.renderFile('./template/jade/'+tenant+'/list.jade', {
-					'css': css,
-					'js': js,
-					'labels': chartist.labels,
-					'series': chartist.series,
-					sites: data,
-					'moment': moment,
-					'csvLocation': csvLocation
-				}, function (err, html) {
-					if (err) {
-						console.log('jade error');
-						reject(err);
-					}
-					else {
-						html = minify(html, {
-							removeAttributeQuotes: true
-						});
-						//console.log('jade success');
-						fulfill(html);
-					}
-				});
+
+                fs.readdir(templateDir,function(err){
+                    if(err){
+                        templateDir = './template/jade/default';
+                    }
+                    render();
+                });
+
+
+
+
 
 
 			}, function (err) {

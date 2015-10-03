@@ -13,11 +13,7 @@
 			csv(data).then(compress).then(uploadCsv);
 			return new Promise.resolve(data);
 		})
-		.then(template)
-		.then(compress)
-		.then(function(html){
-			return uploadTemplate('index.html',html);
-		})
+
 		.then(function (msg) {
 			console.log(msg);
 		}, function (err) {

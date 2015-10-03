@@ -1,28 +1,33 @@
 var AWS = require('aws-sdk'),
 	dyn,
-	config = require('../psi/config')(),
+	config = require('../psi/config'),
 	params = {
 		AttributeDefinitions: [
 			/* required */
-			{
-				AttributeName: 'id', /* required */
+            {
+                AttributeName: 'tenant', /* required */
+                AttributeType: 'S' /* required */
+            },
+
+            {
+				AttributeName: 'uuid', /* required */
 				AttributeType: 'S' /* required */
-			},
-			{
-				AttributeName: 'date', /* required */
-				AttributeType: 'N' /* required */
 			}
+
 			/* more items */
 		],
 		KeySchema: [
-			{
-				AttributeName: 'id', /* required */
-				KeyType: 'HASH' /* required */
-			},
-			{
-				AttributeName: 'date', /* required */
+            {
+                AttributeName: 'tenant', /* required */
+
+                KeyType: 'HASH' /* required */
+            },
+            {
+				AttributeName: 'uuid', /* required */
 				KeyType: 'RANGE' /* required */
 			}
+
+
 
 			/* more items */
 		],
@@ -30,14 +35,14 @@ var AWS = require('aws-sdk'),
 			ReadCapacityUnits: 3, /* required */
 			WriteCapacityUnits: 3 /* required */
 		},
-		TableName: 'stern_de'
+		TableName: 'cctv-neu'
 
 
 
 	};
 
 
-AWS.config.update({region: 'us-east-1'});
+AWS.config.update({region: 'us-east-1','LogLevel':1});
 dyn = new AWS.DynamoDB();
 
 

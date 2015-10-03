@@ -20,9 +20,10 @@ module.exports = function (site,data) {
 		site.data = data;
 		site.data.screenshot.data = data.screenshot.data.replace(/_/g, '/');
 		site.score = data.ruleGroups.SPEED.score;
-		site.id = id;
+		site.uuid = id;
 		site.date = date;
-		site.filename = 'screenshots/' + site.label + '-' + site.id + '.jpg';
+
+		site.filename = 'screenshots/' + site.label + '-' + site.uuid + '.jpg';
 
 		fulfill(site);
 

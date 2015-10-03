@@ -1,9 +1,9 @@
 /* global module */
 module.exports = {
 		'key': 'AIzaSyBj4Ayjtf-mQo5MLbIxc-Qs_lWBI12BzZI',
-		'bucketName':'stern-psir',
+		'bucketName':'ida-123',
 		'region':'us-east-1',
-		'dynamodbTableName': 'stern_de',
+		'dynamodbTableName': 'ida',
 		'tenants': [
 			{
 				'tenantName': 'stern',
@@ -18,7 +18,13 @@ module.exports = {
 				'sites': [
 					{'label':'smashing','url': 'http://www.smashingmagazine.com/', 'strategy': 'desktop', 'ads': true},
 					{'label':'smashing-mobile','url': 'http://www.smashingmagazine.com/', 'strategy': 'mobile', 'ads': true}
-				]}
+				]},
+            {
+                'tenantName': 'bildi',
+                'sites': [
+                    {'label':'home','url': 'http://www.bild.de/', 'strategy': 'desktop', 'ads': true}
+
+                ]}
 		]
 };
 
