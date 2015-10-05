@@ -1,19 +1,20 @@
 extends base
 block content
-    h1 PageSpeed Monitoring
-        a(href='data.csv') CSV 📃
-    div.screenshot
-    div.ct-chart
-    table.table.table-striped.table-hover
-        thead
-            tr
-                th.series-a
-                    span www.smashingmagazine.com
-                th.series-b
-                th
-        tbody
-            include row
-    if !sites.length
-        p No entries found.
+	h1 PageSpeed Monitoring
+		a(href='data.csv') CSV 📃
+	div.screenshot
+	div.ct-chart
+	table.table.table-striped.table-hover
+		thead
+			tr
+				th.series-a
+					span www.smashingmagazine.com
+				th.series-b
+					span mobil
+				th
+		tbody
+			include row
+	if !sites.length
+		p No entries found.
 
 

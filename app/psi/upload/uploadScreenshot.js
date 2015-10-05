@@ -8,9 +8,9 @@ module.exports = function (tenant,site) {
 
 	return new Promise(function (fulfill, reject) {
 		// filename, image, encoding, mime, callback
-		upload(tenant,site.filename, new Buffer(site.data.screenshot.data, 'base64'), 'image/jpeg','', function () {
-			delete site.data.screenshot;
-			//console.log('upload done: '+site.filename);
+		upload(tenant,site.filename, new Buffer(site.screenshot, 'base64'), 'image/jpeg','', function () {
+			delete site.screenshot;
+			console.log('upload done: '+tenant+'/'+site.filename);
 			fulfill(site);
 		}, reject);
 	});

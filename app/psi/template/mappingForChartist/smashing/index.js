@@ -4,7 +4,7 @@ module.exports = function (data) {
     var result = {
         series : {
             'desktop': [],
-            'desktopWithout': []
+            'mobile': []
 
         },
 
@@ -15,7 +15,7 @@ module.exports = function (data) {
     data.slice().reverse().slice(-50).forEach(function (item) {
         result.labels.push('""');
         result.series.desktop.push(item.score);
-
+		result.series.mobile.push(item.related['smashing-mobile'].score);
 
 
     });

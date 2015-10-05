@@ -11,7 +11,7 @@ var gulp = require('gulp'),
 	aws = JSON.parse(fs.readFileSync('./aws.json'));
 
 
-gulp.task('psi', function () {
+gulp.task('default',['js','css'], function () {
 	'use strict';
 	return gulp.src('./app/psi/**/*')
 		.pipe(zip('archive.zip'))
@@ -20,7 +20,7 @@ gulp.task('psi', function () {
 
 
 
-gulp.task('proxy', function () {
+gulp.task('proxy',['js','css'], function () {
 	'use strict';
 	return gulp.src('./app/gateway-proxy/**/*')
 		.pipe(zip('archive.zip'))

@@ -32,17 +32,17 @@ var AWS = require('aws-sdk'),
 			/* more items */
 		],
 		ProvisionedThroughput: { /* required */
-			ReadCapacityUnits: 3, /* required */
-			WriteCapacityUnits: 3 /* required */
+			ReadCapacityUnits: 10, /* required */
+			WriteCapacityUnits: 10 /* required */
 		},
-		TableName: 'cctv-neu'
+		TableName: config.dynamodbTableName
 
 
 
 	};
 
 
-AWS.config.update({region: 'us-east-1','LogLevel':1});
+AWS.config.update({region: 'us-east-1'});
 dyn = new AWS.DynamoDB();
 
 

@@ -40,7 +40,7 @@ module.exports = {
 			var results = [],
 
 				query = {
-                    TableName: 'ida',
+                    TableName: config.dynamodbTableName,
                     IndexName: 'tenant-index',
                     KeyConditions: {
                         "tenant": {

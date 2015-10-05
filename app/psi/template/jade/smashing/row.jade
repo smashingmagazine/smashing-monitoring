@@ -1,10 +1,11 @@
 each site, index in sites
-    tr
-        td(class=site.score < 50 ? "slow" : "",data-screenshot=site.filename)
-            i 💻
-            span= site.score
-        td(class=site.related['smashing-mobile'].score < 50 ? "slow" : "",data-screenshot=site.related['smashing-mobile'].filename)
-            span= site.related['smashing-mobile'].score
-        td
-            span(title=moment(site.date).locale('en').format('LLLL'))
-            span.date(data-date=site.isoDate)=site.isoDate
+	tr
+		td(class=site.score < 50 ? "slow" : "",data-screenshot=site.filename)
+			i 💻
+			span= site.score
+		td(class=site.related['smashing-mobile'].score < 50 ? "slow" : "",data-screenshot=site.related['smashing-mobile'].filename)
+			i 📱
+			span= site.related['smashing-mobile'].score
+		td
+			span(title=moment(site.date).locale('en').format('LLLL'))
+			span.date(data-date=site.isoDate)=site.isoDate
