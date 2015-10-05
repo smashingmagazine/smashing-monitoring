@@ -1,10 +1,11 @@
 var Promise = require('promise'),
 	config = require('../config'),
 	psi = require('psi');
+
 module.exports = function (site) {
 	'use strict';
 	return new Promise(function (fulfill, reject) {
-		psi(site.url, {'key': config.key, 'strategy': site.strategy, 'screenshot': true}, function (err, res) {
+		psi(site.url, {'key': config.psiKey, 'strategy': site.strategy, 'screenshot': true}, function (err, res) {
 			if(err){
 				reject(err);
 			}
@@ -15,7 +16,6 @@ module.exports = function (site) {
 				console.log('psi: '+res.id +' ('+res.ruleGroups.SPEED.score+')');
 				fulfill(res);
 			}
-
 		});
 	});
 };

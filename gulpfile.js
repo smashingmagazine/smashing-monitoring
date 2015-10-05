@@ -15,17 +15,20 @@ gulp.task('default',['js','css'], function () {
 	'use strict';
 	return gulp.src('./app/psi/**/*')
 		.pipe(zip('archive.zip'))
-		.pipe(lambda(aws.lambda_params_psi, aws));
+		.pipe(lambda(config.bucketName, aws));
 });
 
 
 
-gulp.task('proxy',['js','css'], function () {
+gulp.task('proxy', function () {
 	'use strict';
 	return gulp.src('./app/gateway-proxy/**/*')
 		.pipe(zip('archive.zip'))
-		.pipe(lambda(aws.lambda_params_proxy, aws));
+		.pipe(lambda(aws.proxy));
 });
+
+
+
 
 gulp.task('s3', function() {
 	'use strict';

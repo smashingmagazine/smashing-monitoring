@@ -6,7 +6,6 @@ var Promise = require('promise'),
 	mapPsiData = require('./psiWrapper/mapPsiData'),
 	uploadScreenshot = require('./upload/uploadScreenshot'),
 	psi = require('./psiWrapper'),
-	dataMapping = require('./dataMapping'),
 	dynamoDb = require('./database/dynamoDb'),
 	uploadCsv = require('./upload/uploadCsv'),
 	uploadTemplate = require('./upload/uploadTemplate');

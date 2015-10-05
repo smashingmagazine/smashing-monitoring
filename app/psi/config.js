@@ -1,6 +1,6 @@
 /* global module */
 module.exports = {
-		'key': 'AIzaSyBj4Ayjtf-mQo5MLbIxc-Qs_lWBI12BzZI',
+		'psiKey': 'AIzaSyBj4Ayjtf-mQo5MLbIxc-Qs_lWBI12BzZI',
 		'bucketName':'speed-monitor',
 		'region':'us-east-1',
 		'dynamodbTableName': 'speed-monitor',
