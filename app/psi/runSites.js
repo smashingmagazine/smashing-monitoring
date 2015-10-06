@@ -70,7 +70,7 @@ module.exports = function (tenant) {
 
 							});
 						return new Promise.resolve(data);
-						// keine Error handling!!
+						// kein Error handling!!
 
 					}, function (err) {
 						console.log(err);

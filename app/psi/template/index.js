@@ -3,6 +3,7 @@ var jade = require('jade'),
 	minify = require('html-minifier').minify,
 	moment = require('moment'),
 	Promise = require('promise'),
+	chartistMapper = require('./mappingForChartist'),
 	readFile = function (filename) {
 		'use strict';
 		return new Promise(function (fulfill, reject) {
@@ -23,14 +24,6 @@ var jade = require('jade'),
 	readFiles = function (filenames) {
 		'use strict';
 		return Promise.all(filenames.map(readFile));
-    },
-    getChartistMapper = function(tenant){
-        try{
-            return require('./mappingForChartist/'+tenant);
-        }
-        catch(e){
-            return require('./mappingForChartist/default/')
-        }
     };
 
 module.exports = {
@@ -69,14 +62,13 @@ module.exports = {
 				var css = assets[0],
 					js = assets[1],
 					csvLocation = 'data.csv',
-					chartist = getChartistMapper(tenant)(data),
+					chartist = chartistMapper(data),
                     templateDir = './template/jade/'+data.tenant,
                     render = function(){
                         jade.renderFile(templateDir+'/list.jade', {
                             'css': css,
                             'js': js,
-                            'labels': chartist.labels,
-                            'series': chartist.series,
+                            'chartist': chartist,
                             sites: data,
                             'moment': moment,
                             'csvLocation': csvLocation
@@ -92,7 +84,7 @@ module.exports = {
                                 //console.log('jade success');
                                 fulfill(html);
                             }
-                        })
+                        });
                     };
 
 
