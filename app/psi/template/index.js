@@ -88,6 +88,7 @@ module.exports = {
 						});
 					};
 
+                //console.log(chartist);
 
 				// Iso Date hinzufügen
 				data.map(isoDate);

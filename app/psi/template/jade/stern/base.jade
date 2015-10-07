@@ -13,4 +13,5 @@ html(lang="de")
         .container
             block content
         script.
-            var series = !{JSON.stringify(chartist.series)};labels = [!{chartist.labels}]; !{js}
+            var series = [!{JSON.stringify(chartist.series['desktop-with-ads'])},!{JSON.stringify(chartist.series['desktop-without-ads'])},!{JSON.stringify(chartist.series['mobile-with-ads'])},!{JSON.stringify(chartist.series['mobile-without-ads'])},!{JSON.stringify(chartist.series['desktop-with-ads-async'])}],
+            labels = [!{chartist.labels}]; !{js}

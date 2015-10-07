@@ -1,32 +1,30 @@
 module.exports = function (data) {
-
 	'use strict';
 	var result = {
 		'labels': [],
-		'series': []
+		'series': {}
 	};
 
 	data.slice().reverse().slice(-50).forEach(function (item) {
 		result.labels.push('');
-		var i = 1;
-		if (!result.series[0]) {
-			result.series[0] = [];
-		}
-		result.series[0].push(item.score);
+
+        if(!result.series[item.label]){
+            result.series[item.label] = [];
+        }
+        result.series[item.label].push(item.score);
+
 
 		for (var property in item.related) {
 			if (item.related.hasOwnProperty(property)) {
-				if(!result.series[i]){
-					result.series[i] = [];
+				if(!result.series[property]){
+					result.series[property] = [];
 				}
-				result.series[i].push(item.related[property].score);
-				i++;
+				result.series[property].push(item.related[property].score);
+
 			}
 		}
-
 	});
 	//console.log(result);
 	return result;
-
 };
 
