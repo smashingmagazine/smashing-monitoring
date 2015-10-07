@@ -5,7 +5,7 @@ module.exports = function (data) {
 		'series': {}
 	};
 
-	data.slice().reverse().slice(-50).forEach(function (item) {
+	data.forEach(function (item) {
 		result.labels.push('');
 
         if(!result.series[item.label]){
