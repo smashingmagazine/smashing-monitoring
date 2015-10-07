@@ -2,7 +2,7 @@ var Promise = require('promise'),
 	mapRelated = require('./psiWrapper/mapRelated'),
 	compress = require('./compress'),
 	template = require('./template'),
-	csv = require('./csv'),
+
 	mapPsiData = require('./psiWrapper/mapPsiData'),
 	uploadScreenshot = require('./upload/uploadScreenshot'),
 	psi = require('./psiWrapper'),
@@ -47,7 +47,8 @@ module.exports = function (tenant) {
 		return  new Promise(function (fulfill, reject) {
 			runAllSites(tenant).done(function (data) {
 
-				var tenantName = tenant.tenantName;
+				var tenantName = tenant.tenantName,
+                    csv = require('./csv/'+tenantName);
 				data = mapRelated(data);
 				data.tenant = tenantName;
 

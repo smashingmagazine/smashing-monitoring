@@ -2,16 +2,18 @@ var Promise = require('promise'),
 
 	compress = require('./compress'),
 	template = require('./template'),
-	csv = require('./csv'),
+
 
 	psi = require('./psiWrapper'),
 	dynamoDb = require('./database/dynamoDb'),
 	uploadCsv = require('./upload/uploadCsv'),
 	uploadTemplate = require('./upload/uploadTemplate'),
-	tenantName = 'stern';
+	tenantName = 'smashing',
+    csv = require('./csv/'+tenantName);
 
 var render = function(fulfill, reject){
-	dynamoDb.getSites(tenantName)
+
+    dynamoDb.getSites(tenantName)
 // CSV erzeugen
 		.then(function (data) {
 			csv(data)
