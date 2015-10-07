@@ -35,6 +35,26 @@ var AWS = require('aws-sdk'),
 			ReadCapacityUnits: 10, /* required */
 			WriteCapacityUnits: 10 /* required */
 		},
+        "GlobalSecondaryIndexes": [
+            {
+                "IndexName": "tenant-index",
+                "KeySchema": [
+                    {
+                        "AttributeName": "tenant",
+                        "KeyType": "HASH"
+                    }
+                ],
+                "Projection": {
+
+                    "ProjectionType": "ALL"
+                },
+
+                "ProvisionedThroughput": {
+                    "ReadCapacityUnits": 5,
+                    "WriteCapacityUnits": 5
+                }
+            }
+        ],
 		TableName: config.dynamodbTableName
 
 

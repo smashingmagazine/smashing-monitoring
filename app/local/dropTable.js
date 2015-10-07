@@ -1,6 +1,6 @@
 var AWS = require('aws-sdk'),
 	dyn,
-	config = require('../psi/config')(),
+	//config = require('../psi/config'),
 	params;
 
 
