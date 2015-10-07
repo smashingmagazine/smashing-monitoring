@@ -19,7 +19,6 @@ module.exports = function (data) {
 				if(!result.series[i]){
 					result.series[i] = [];
 				}
-				console.log(property);
 				result.series[i].push(item.related[property].score);
 				i++;
 			}

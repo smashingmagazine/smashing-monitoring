@@ -5,6 +5,13 @@ each site, index in sites
 			span= site.score
 		td(data-screenshot=site.related['desktop-without-ads'].filename)
 			em(title=('PageSpeed für '+ site.related['desktop-without-ads'].url))=site.related['desktop-without-ads'].score
+
+		if(site.related['desktop-with-ads-async'])
+			td(data-screenshot=site.related['desktop-with-ads-async'].filename)
+				em(title=('PageSpeed für '+ site.related['desktop-with-ads-async'].url))=site.related['desktop-with-ads-async'].score
+		else
+			td
+
 		td(class=site.related['mobile-with-ads'].score < 50 ? "slow" : "",data-screenshot=site.related['mobile-with-ads'].filename)
 			i 📱
 			span.mobile= (site.related['mobile-with-ads'].score)

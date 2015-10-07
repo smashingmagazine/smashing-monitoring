@@ -4,6 +4,7 @@ var jade = require('jade'),
 	moment = require('moment'),
 	Promise = require('promise'),
 	chartistMapper = require('./mappingForChartist'),
+	defaultTemplateDir = './template/jade/default',
 	readFile = function (filename) {
 		'use strict';
 		return new Promise(function (fulfill, reject) {
@@ -24,86 +25,84 @@ var jade = require('jade'),
 	readFiles = function (filenames) {
 		'use strict';
 		return Promise.all(filenames.map(readFile));
-    };
+	};
 
 module.exports = {
-	'rows' : function(rows){
+	'rows': function (rows) {
 		'use strict';
 		return new Promise(function (fulfill, reject) {
 
-            var templateDir = './template/jade/'+rows.tenant,
-                render = function(){
-                    jade.renderFile(templateDir+'/row.jade',{'sites':rows.slice(3),'moment':moment},function(err,row){
-                        if(err){
-                            reject(err);
-                        }
-                        else {
-                            console.log('row rendered');
-                            fulfill(row);
-                        }
-                    });
-                };
-            fs.readdir(templateDir,function(err){
-                if(err){
-                    templateDir = './template/jade/default';
-                }
-                render();
-            });
-
+			var templateDir = './template/jade/' + rows.tenant,
+				render = function () {
+					jade.renderFile(templateDir + '/row.jade', {'sites': rows.slice(3), 'moment': moment}, function (err, row) {
+						if (err) {
+							reject(err);
+						}
+						else {
+							console.log('row rendered');
+							fulfill(row);
+						}
+					});
+				};
+			/* TODO DRY!!*/
+			fs.readdir(templateDir, function (err) {
+				if (err) {
+					templateDir = defaultTemplateDir;
+				}
+				render();
+			});
 
 
 		});
 
 	},
-	'index': function (tenant,data) {
+	'index': function (tenant, data) {
 		'use strict';
-        return new Promise(function (fulfill, reject) {
+		return new Promise(function (fulfill, reject) {
 			readFiles(['./template/assets/app.css', './template/assets/app.js']).done(function (assets) {
 				var css = assets[0],
 					js = assets[1],
 					csvLocation = 'data.csv',
 					chartist = chartistMapper(data),
-                    templateDir = './template/jade/'+data.tenant,
-                    render = function(){
-                        jade.renderFile(templateDir+'/list.jade', {
-                            'css': css,
-                            'js': js,
-                            'chartist': chartist,
-                            sites: data,
-                            'moment': moment,
-                            'csvLocation': csvLocation
-                        }, function (err, html) {
-                            if (err) {
-                                console.log('jade error');
-                                reject(err);
-                            }
-                            else {
-                                html = minify(html, {
-                                    removeAttributeQuotes: true
-                                });
-                                //console.log('jade success');
-                                fulfill(html);
-                            }
-                        });
-                    };
+					templateDir = './template/jade/' + data.tenant,
+					render = function () {
+						jade.renderFile(templateDir + '/list.jade', {
+							'css': css,
+							'js': js,
+							'chartist': chartist,
+							sites: data,
+							'moment': moment,
+							'csvLocation': csvLocation
+						}, function (err, html) {
+							if (err) {
+								console.log('jade error');
+								reject(err);
+							}
+							else {
+								html = minify(html, {
+									removeAttributeQuotes: true
+								});
+								//console.log('jade success');
+								fulfill(html);
+							}
+						});
+					};
 
 
 				// Iso Date hinzufügen
 				data.map(isoDate);
+
+				// nach Datum sortieren
 				data.sort(function (a, b) {
 					return b.date - a.date;
 				});
-
-                fs.readdir(templateDir,function(err){
-                    if(err){
-                        templateDir = './template/jade/default';
-                    }
-                    render();
-                });
-
-
-
-
+				/* TODO DRY!!*/
+				fs.readdir(templateDir, function (err) {
+					if (err) {
+						templateDir = defaultTemplateDir;
+					}
+					render();
+				});
 
 
 			}, function (err) {

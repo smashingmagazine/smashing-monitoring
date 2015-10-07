@@ -10,6 +10,7 @@ module.exports = {
 				'sites': [
 					{'label':'desktop-with-ads','url': 'http://www.stern.de/', 'strategy': 'desktop'},
 					{'label':'mobile-with-ads','url': 'http://mobil.stern.de/', 'strategy': 'mobile'},
+					{'label':'desktop-with-ads-async','url': 'http://www.stern.de/?async=1', 'strategy': 'desktop'},
 					{'label':'desktop-without-ads','url': 'http://www.stern.de/?disableGujAd=1', 'strategy': 'desktop'},
 					{'label':'mobile-without-ads','url': 'http://mobil.stern.de/?disableGujAd=1', 'strategy': 'mobile'}
 				]},
