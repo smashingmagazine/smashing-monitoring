@@ -8,7 +8,7 @@ var Promise = require('promise'),
 	dynamoDb = require('./database/dynamoDb'),
 	uploadCsv = require('./upload/uploadCsv'),
 	uploadTemplate = require('./upload/uploadTemplate'),
-	tenantName = 'smashing',
+	tenantName = 'stern',
     csv = require('./csv/'+tenantName);
 
 var render = function(fulfill, reject){
