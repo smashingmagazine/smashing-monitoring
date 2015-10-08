@@ -19,7 +19,13 @@ module.exports = {
 				'sites': [
 					{'label':'smashing','url': 'http://www.smashingmagazine.com/', 'strategy': 'desktop'},
 					{'label':'smashing-mobile','url': 'http://www.smashingmagazine.com/', 'strategy': 'mobile'}
-				]}
+				]},
+            {
+                'tenantName': 'guardian',
+                'sites': [
+                    {'label':'guardian','url': 'http://www.theguardian.com/international', 'strategy': 'desktop'},
+                    {'label':'guardian-mobile','url': 'http://www.theguardian.com/international', 'strategy': 'mobile'}
+                ]}
 		]
 };
 

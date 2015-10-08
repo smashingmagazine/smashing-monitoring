@@ -1,0 +1,24 @@
+extends base
+block content
+    h1 Speed Monitoring
+
+    div.screenshot
+    div.ct-chart
+    table.table.table-striped.table-hover
+        thead
+            tr
+                th.series-a
+                    i 💻
+                    span http://www.theguardian.com/international
+                th.series-b
+                    i 📱
+                    span http://www.theguardian.com/international
+                th
+        tbody
+            include row
+    if !sites.length
+        p No entries found.
+
+    include ../common/footer
+
+
