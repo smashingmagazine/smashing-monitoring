@@ -13,7 +13,7 @@ module.exports = function (data) {
 				var params = {
 						FunctionName: 'phantomjs',
 						InvocationType: 'Event',
-						Payload: new Buffer(JSON.stringify({'tenant': tenant, 'uuid': uuid, 'label': property}))
+						Payload: new Buffer(JSON.stringify({'tenant': tenant, 'uuid': uuid, 'label': property,'url':property.url}))
 					},
 					lambda = new AWS.Lambda();
 				lambda.invoke(params, function (err, response) {
