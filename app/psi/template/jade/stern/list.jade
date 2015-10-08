@@ -1,27 +1,32 @@
 extends base
 block content
-	h1 PageSpeed Monitoring
-		a(href='data.csv') CSV 📃
-	div.screenshot
-	div.ct-chart
-	table.table.table-striped.table-hover
-				thead
-					tr
-						th.series-a
-							span www.stern.de
-						th.series-b
-							span disableGujAd=1
-						th.async
-							span async=1
+    h1 PageSpeed Monitoring
+        a(href='data.csv') CSV 📃
+    div.screenshot
+    div.ct-chart
+    table.table.table-striped.table-hover
+        thead
+            tr
+                th.series-a
+                    i 💻
+                    span www.stern.de
+                th.series-b
+                    i 💻
+                    span disableGujAd=1
+                th.async
+                    i 💻
+                    span async=1
 
-						th.series-c
-							span mobil.stern.de
-						th.series-d
-							span disableGujAd=1
-						th
-				tbody
-					include row
-			if !sites.length
-				p No entries found.
+                th.series-c
+                    i 📱
+                    span mobil.stern.de
+                th.series-d
+                    i 📱
+                    span disableGujAd=1
+                th
+        tbody
+            include row
+    if !sites.length
+        p No entries found.
 
 

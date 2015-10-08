@@ -18,6 +18,12 @@ var jade = require('jade'),
 			});
 		});
 	},
+    dcl = function(dcl){
+        if(typeof dcl ==='undefined'){
+            return '';
+        }
+        return (Math.round(dcl/1000).toFixed(1))+'s';
+    },
 	isoDate = function (item) {
 		'use strict';
 		item.isoDate = new Date(item.date).toISOString();
@@ -34,7 +40,7 @@ module.exports = {
 
 			var templateDir = './template/jade/' + rows.tenant,
 				render = function () {
-					jade.renderFile(templateDir + '/row.jade', {'sites': rows.slice(3), 'moment': moment}, function (err, row) {
+					jade.renderFile(templateDir + '/row.jade', {'sites': rows.slice(3), 'moment': moment,'dcl':dcl}, function (err, row) {
 						if (err) {
 							reject(err);
 						}
@@ -62,6 +68,7 @@ module.exports = {
 			readFiles(['./template/assets/app.css', './template/assets/app.js']).done(function (assets) {
 				var css = assets[0],
 					js = assets[1],
+
 					csvLocation = 'data.csv',
 					chartist = chartistMapper(data),
 					templateDir = './template/jade/' + data.tenant,
@@ -69,6 +76,7 @@ module.exports = {
 						jade.renderFile(templateDir + '/list.jade', {
 							'css': css,
 							'js': js,
+                            'dcl':dcl,
 							'chartist': chartist,
 							sites: data,
 							'moment': moment,
