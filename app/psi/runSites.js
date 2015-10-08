@@ -8,6 +8,7 @@ var Promise = require('promise'),
 	psi = require('./psiWrapper'),
 	dynamoDb = require('./database/dynamoDb'),
 	uploadCsv = require('./upload/uploadCsv'),
+	phantomJs = require('./phantomjs'),
 	uploadTemplate = require('./upload/uploadTemplate');
 
 
@@ -22,10 +23,12 @@ var runAllSites = function (tenant) {
 					.then(function (data) {
 						return mapPsiData(site, data);
 					})
+
 					// Screenshot hochladen
 					.then(function (site) {
 						return uploadScreenshot(tenant.tenantName, site);
 					})
+
 					.then(function () {
 						fulfill(site);
 
@@ -55,7 +58,9 @@ module.exports = function (tenant) {
 				// Ergebnis speichern
 				dynamoDb.saveSite(data)
 					// alle Ergebnisse holen
+					.then(phantomJs)
 					.then(dynamoDb.getSites)
+
 					// CSV erzeugen
 					.then(function (data) {
 						csv(data)

@@ -48,6 +48,9 @@ h1 {
 th span {
 	padding: 2px;
 }
+td i {
+	font-style: normal;
+}
 td span,td em {
     padding: 3px;
     margin : 3px;

@@ -1,8 +1,0 @@
-each site, index in sites
-    tr
-        td(class=site.score < 50 ? "slow" : "",data-screenshot=site.filename)
-            i 💻
-            span= site.score
-        td
-            span(title=moment(site.date).locale('en').format('LLLL'))
-            span.date(data-date=site.isoDate)=site.isoDate

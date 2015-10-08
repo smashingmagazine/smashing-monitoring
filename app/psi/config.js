@@ -1,9 +1,9 @@
 /* global module */
 module.exports = {
 		'psiKey': 'AIzaSyBj4Ayjtf-mQo5MLbIxc-Qs_lWBI12BzZI',
-		'bucketName':'speed-monitor',
+		'bucketName':'speed-monitor-with-timings',
 		'region':'us-east-1',
-		'dynamodbTableName': 'neu',
+		'dynamodbTableName': 'speed-monitor-with-timings',
 		'tenants': [
 			{
 				'tenantName': 'stern',

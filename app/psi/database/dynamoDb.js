@@ -16,7 +16,6 @@ module.exports = {
 		'use strict';
 		return new Promise(function (fulfill, reject) {
 			var item = attr.wrap(data);
-
 			db.putItem(
 				{
 					'TableName': config.dynamodbTableName,
@@ -28,7 +27,7 @@ module.exports = {
 					}
 					else {
 						console.log('entry saved to dynamodb');
-						fulfill(data.tenant);
+						fulfill(data);
 					}
 				});
 		});

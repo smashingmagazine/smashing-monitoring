@@ -5,8 +5,7 @@ AWS.config.update({region: 'us-east-1'});
 lambda = new AWS.Lambda();
 
 exports.handler = function (event, context) {
-
-
+	'use strict';
     lambda.invoke({
         FunctionName: 'speed-monitor',
         InvocationType: 'Event'

@@ -75,6 +75,6 @@ dyn.createTable(params, function (err, data) {
 		console.log(err);
 	}
 	else {
-		console.log('table created');
+		console.log('table '+config.dynamodbTableName+' created');
 	}
 });
