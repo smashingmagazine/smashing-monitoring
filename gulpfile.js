@@ -15,7 +15,7 @@ gulp.task('default',['js','css'], function () {
 	'use strict';
 	return gulp.src('./app/psi/**/*')
 		.pipe(zip('archive.zip'))
-		.pipe(lambda(config.bucketName, aws));
+		.pipe(lambda(aws.callMeBaby));
 });
 
 
@@ -61,7 +61,7 @@ gulp.task('s3', function() {
 
 gulp.task('js',function(){
 	'use strict';
-	return gulp.src(['./app/bower_components/zepto/zepto.js','./app/bower_components/moment/min/moment.min.js','./app/bower_components/moment/locale/de.js','./app/bower_components/chartist/dist/chartist.js','./app/frontend-src/custom.js'])
+	return gulp.src(['./app/bower_components/zepto/zepto.js','./app/bower_components/moment/min/moment.min.js','./app/bower_components/chartist/dist/chartist.js','./app/frontend-src/custom.js'])
 		.pipe(concat('app.js'))
 		.pipe(uglify())
 		.pipe(rename('app.js'))

@@ -32,8 +32,8 @@ var AWS = require('aws-sdk'),
 			/* more items */
 		],
 		ProvisionedThroughput: { /* required */
-			ReadCapacityUnits: 10, /* required */
-			WriteCapacityUnits: 10 /* required */
+			ReadCapacityUnits: 7, /* required */
+			WriteCapacityUnits: 7 /* required */
 		},
         "GlobalSecondaryIndexes": [
             {

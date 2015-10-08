@@ -1,20 +1,26 @@
 extends base
 block content
-	h1 PageSpeed Monitoring
+    h1 Speed Monitoring
 
-	div.screenshot
-	div.ct-chart
-	table.table.table-striped.table-hover
-		thead
-			tr
-				th.series-a
-					span www.smashingmagazine.com
-				th.series-b
-					span mobil
-				th
-		tbody
-			include row
-	if !sites.length
-		p No entries found.
+    div.screenshot
+    div.ct-chart
+    table.table.table-striped.table-hover
+        thead
+            tr
+                th.series-a
+                    i 💻
+                    span http://www.smashingmagazine.com/
+                th.series-b
+                    i 📱
+                    span http://www.smashingmagazine.com/
+                th
+        tbody
+            include row
+    if !sites.length
+        p No entries found.
+
+    p.info
+        a.dcl(href="https://gist.github.com/christianhaller/6930998166a5084288b8") PhantomJS 1.9.8: DOMContentLoaded
+        a.psi(href="https://developers.google.com/speed/pagespeed/") Google PageSpeed
 
 

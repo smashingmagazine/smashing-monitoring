@@ -5,7 +5,7 @@ module.exports = function (data) {
 		'series': {}
 	};
 
-	data.forEach(function (item) {
+	data.reverse().forEach(function (item) {
 		result.labels.push('');
 
 		for (var property in item.sites) {

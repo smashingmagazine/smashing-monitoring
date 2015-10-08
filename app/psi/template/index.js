@@ -22,7 +22,7 @@ var jade = require('jade'),
         if(typeof dcl ==='undefined'){
             return '';
         }
-        return (Math.round(dcl/1000).toFixed(1))+'s';
+        return (dcl/1000).toFixed(1)+'s';
     },
 	isoDate = function (item) {
 		'use strict';
