@@ -1,6 +1,6 @@
 extends base
 block content
-    h1 Speed Monitoring
+    h1 Speed Monitoring for the guarian
 
     div.screenshot
     div.ct-chart
@@ -16,6 +16,9 @@ block content
                 th
         tbody
             include row
+
+    include ../common/more
+
     if !sites.length
         p No entries found.
 

@@ -39,6 +39,10 @@
 
     });
 
+    $('.js-more').on('click',function(){
+       $('.table').toggleClass('more');
+    });
+
 
     Chartist.Line('.ct-chart', {
         'labels': labels,
