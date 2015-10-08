@@ -8,23 +8,16 @@ module.exports = function (data) {
 	data.forEach(function (item) {
 		result.labels.push('');
 
-        if(!result.series[item.label]){
-            result.series[item.label] = [];
-        }
-        result.series[item.label].push(item.score);
-
-
-		for (var property in item.related) {
-			if (item.related.hasOwnProperty(property)) {
+		for (var property in item.sites) {
+			if (item.sites.hasOwnProperty(property)) {
 				if(!result.series[property]){
 					result.series[property] = [];
 				}
-				result.series[property].push(item.related[property].score);
+				result.series[property].push(item.sites[property].score);
 
 			}
 		}
 	});
-	//console.log(result);
 	return result;
 };
 

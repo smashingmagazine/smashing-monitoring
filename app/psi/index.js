@@ -14,7 +14,7 @@ exports.handler = function (event, context) {
         };
 
 
-    runAllTenants(tenants).done(function (data) {
+    runAllTenants(tenants).done(function () {
         console.log('all done');
         context.succeed('🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉🎉');
 

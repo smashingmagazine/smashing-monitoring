@@ -3,7 +3,7 @@ module.exports = {
 		'psiKey': 'AIzaSyBj4Ayjtf-mQo5MLbIxc-Qs_lWBI12BzZI',
 		'bucketName':'speed-monitor',
 		'region':'us-east-1',
-		'dynamodbTableName': 'speed-monitor',
+		'dynamodbTableName': 'neu',
 		'tenants': [
 			{
 				'tenantName': 'stern',

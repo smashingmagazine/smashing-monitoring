@@ -75,7 +75,7 @@ module.exports = {
 							'csvLocation': csvLocation
 						}, function (err, html) {
 							if (err) {
-								console.log('jade error');
+								console.log(err);
 								reject(err);
 							}
 							else {

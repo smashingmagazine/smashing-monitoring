@@ -1,12 +1,16 @@
+var shortid = require('shortid');
+
+
 module.exports = function (data) {
 	'use strict';
-	var row = data[0];
-	row.related = {};
-	// den ersten Index löschen
+	var date = Date.now(),
+		uuid = shortid.generate(),
+		row = {'uuid':uuid,'date':date,'tenant':data[0].tenant};
 
-	// Hier auf Array wechseln!!!
-	data.splice(1).forEach(function (relatedSite) {
-		row.related[relatedSite.label] = relatedSite;
+	row.sites = {};
+
+	data.forEach(function (site) {
+		row.sites[site.label] = site;
 	});
 	return row;
 };

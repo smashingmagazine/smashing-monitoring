@@ -13,11 +13,11 @@ module.exports = function (data) {
 
 		data.forEach(function (item) {
 			csv.push({'date': new Date(item.date).toISOString(),
-                'desktop-with-ads': item.score,
-                'desktop-without-ads': item.related['desktop-without-ads'].score,
-                'desktop-with-ads-async':(item.related['desktop-with-ads-async']?item.related['desktop-with-ads-async'].score : ''),
-                'mobile-with-ads':item.related['mobile-with-ads'].score,
-                'mobile-without-ads': item.related['mobile-without-ads'].score
+                'desktop-with-ads': item.sites['desktop-with-ads'].score,
+                'desktop-without-ads': item.sites['desktop-without-ads'].score,
+                'desktop-with-ads-async':(item.sites['desktop-with-ads-async']?item.sites['desktop-with-ads-async'].score : ''),
+                'mobile-with-ads':item.sites['mobile-with-ads'].score,
+                'mobile-without-ads': item.sites['mobile-without-ads'].score
             });
 		});
 

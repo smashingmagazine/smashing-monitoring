@@ -12,8 +12,8 @@ module.exports = function (data) {
 
         data.forEach(function (item) {
             csv.push({'date': new Date(item.date).toISOString(),
-                'desktop': item.score,
-                'mobile': item.related['smashing-mobile'].score
+                'desktop': item.sites.smashing.score,
+                'mobile': item.sites['smashing-mobile'].score
 
             });
         });

@@ -48,7 +48,7 @@ h1 {
 th span {
 	padding: 2px;
 }
-td span {
+td span,td em {
     padding: 3px;
     margin : 3px;
 }
