@@ -1,25 +1,27 @@
 each site, index in sites
-	tr
-		td(class=site.sites['desktop-with-ads'].score < 50 ? "slow" : "",data-screenshot=site.sites['desktop-with-ads'].filename)
-			i 💻
-			span= site.sites['desktop-with-ads'].score
-		td(data-screenshot=site.sites['desktop-without-ads'].filename)
-			i 💻
-			span(title=('PageSpeed für '+ site.sites['desktop-without-ads'].url))=site.sites['desktop-without-ads'].score
+    tr
+        td(class=site.sites['desktop-with-ads'].score < 50 ? "slow" : "",data-screenshot=site.sites['desktop-with-ads'].filename)
+            i 💻
+            span= site.sites['desktop-with-ads'].score
+            span.dcl= site.sites['desktop-with-ads'].dcl
+        td(data-screenshot=site.sites['desktop-without-ads'].filename)
+            i 💻
+            span(title=('PageSpeed für ' + site.sites['desktop-without-ads'].url))=site.sites['desktop-without-ads'].score
+            span.dcl= site.sites['desktop-without-ads'].dcl
 
-		if(site.sites['desktop-with-ads-async'])
-			td(data-screenshot=site.sites['desktop-with-ads-async'].filename)
-				i 💻
-				span(title=('PageSpeed für '+ site.sites['desktop-with-ads-async'].url))=site.sites['desktop-with-ads-async'].score
-		else
-			td
+        td(data-screenshot=site.sites['desktop-with-ads-async'].filename)
+            i 💻
+            span(title=('PageSpeed für ' + site.sites['desktop-with-ads-async'].url))=site.sites['desktop-with-ads-async'].score
+            span.dcl= site.sites['desktop-with-ads-async'].dcl
 
-		td(class=site.sites['mobile-with-ads'].score < 50 ? "slow" : "",data-screenshot=site.sites['mobile-with-ads'].filename)
-			i 📱
-			span.mobile= (site.sites['mobile-with-ads'].score)
-		td(data-screenshot=site.sites['mobile-without-ads'].filename)
-			i 📱
-			span(title=('PageSpeed für '+ site.sites['mobile-without-ads'].url))=site.sites['mobile-without-ads'].score
-		td
-			span(title=moment(site.date).locale('de').format('LLLL'))
-			span.date(data-date=site.isoDate)=site.isoDate
+        td(class=site.sites['mobile-with-ads'].score < 50 ? "slow" : "",data-screenshot=site.sites['mobile-with-ads'].filename)
+            i 📱
+            span.mobile= (site.sites['mobile-with-ads'].score)
+            span= site.sites['mobile-with-ads'].dcl
+        td(data-screenshot=site.sites['mobile-without-ads'].filename)
+            i 📱
+            span(title=('PageSpeed für ' + site.sites['mobile-without-ads'].url))=site.sites['mobile-without-ads'].score
+            span.dcl= site.sites['mobile-without-ads'].dcl
+        td
+            span(title=moment(site.date).locale('de').format('LLLL'))
+            span.date(data-date=site.isoDate)=site.isoDate

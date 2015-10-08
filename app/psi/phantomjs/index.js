@@ -10,13 +10,14 @@ module.exports = function (data) {
 
 		for (var property in data.sites) {
 			if (data.sites.hasOwnProperty(property)) {
-				var params = {
+                
+                var params = {
 						FunctionName: 'phantomjs',
 						InvocationType: 'Event',
-						Payload: new Buffer(JSON.stringify({'tenant': tenant, 'uuid': uuid, 'label': property,'url':property.url}))
+						Payload: new Buffer(JSON.stringify({'tenant': tenant, 'uuid': uuid, 'label': data.sites[property].label,'url':data.sites[property].url}))
 					},
 					lambda = new AWS.Lambda();
-				lambda.invoke(params, function (err, response) {
+				lambda.invoke(params, function (err) {
 					if (err) {
 						console.log(err);
 					}
