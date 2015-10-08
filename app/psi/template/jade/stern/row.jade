@@ -4,10 +4,12 @@ each site, index in sites
 			i 💻
 			span= site.score
 		td(data-screenshot=site.related['desktop-without-ads'].filename)
+			i 💻
 			em(title=('PageSpeed für '+ site.related['desktop-without-ads'].url))=site.related['desktop-without-ads'].score
 
 		if(site.related['desktop-with-ads-async'])
 			td(data-screenshot=site.related['desktop-with-ads-async'].filename)
+				i 💻
 				em(title=('PageSpeed für '+ site.related['desktop-with-ads-async'].url))=site.related['desktop-with-ads-async'].score
 		else
 			td
@@ -16,6 +18,7 @@ each site, index in sites
 			i 📱
 			span.mobile= (site.related['mobile-with-ads'].score)
 		td(data-screenshot=site.related['mobile-without-ads'].filename)
+			i 📱
 			em(title=('PageSpeed für '+ site.related['mobile-without-ads'].url))=site.related['mobile-without-ads'].score
 		td
 			span(title=moment(site.date).locale('de').format('LLLL'))
