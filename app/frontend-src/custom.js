@@ -18,7 +18,7 @@
         $img.on('load', function () {
             $img.addClass('show');
         });
-        $img.on('error', function(){
+        $img.on('error', function () {
             $img.removeClass('show');
         });
 
@@ -39,20 +39,21 @@
 
     });
 
-    $('.js-more').on('click',function(){
-       $('.table').toggleClass('more');
+    $('.js-more').on('click', function () {
+        $('.table').toggleClass('more');
     });
 
-
-    Chartist.Line('.ct-chart', {
-        'labels': labels,
-        'series': series
-    }, {
-        fullWidth: true,
-        chartPadding: {
-            right: 40
-        }
-    });
+    if (typeof labels !== 'undefined' && typeof series !== 'undefined') {
+        Chartist.Line('.ct-chart', {
+            'labels': labels,
+            'series': series
+        }, {
+            fullWidth: true,
+            chartPadding: {
+                right: 40
+            }
+        });
+    }
 
 
 })(window, document, Zepto, moment);

@@ -25,6 +25,18 @@ module.exports = {
                 'sites': [
                     {'label':'guardian','url': 'http://www.theguardian.com/international', 'strategy': 'desktop'},
                     {'label':'guardian-mobile','url': 'http://www.theguardian.com/international', 'strategy': 'mobile'}
+                ]},
+            {
+                'tenantName': 'publishers',
+                'sites': [
+                    {'label':'stern','url': 'http://www.stern.de', 'strategy': 'desktop'},
+                    {'label':'zeit','url': 'http://www.zeit.de/index', 'strategy': 'desktop'},
+                    {'label':'sz','url': 'http://www.sueddeutsche.de/', 'strategy': 'desktop'},
+                    {'label':'spiegel','url': 'http://www.spiegel.de', 'strategy': 'desktop'},
+                    {'label':'chefkoch','url':'http://www.chefkoch.de','strategy':'desktop'},
+                    {'label':'guardian','url': 'http://www.theguardian.com/international', 'strategy': 'desktop'},
+                    {'label':'tagesschau','url': 'http://www.tagesschau.de', 'strategy': 'desktop'}
+
                 ]}
 		]
 };

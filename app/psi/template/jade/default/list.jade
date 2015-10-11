@@ -1,18 +1,14 @@
 extends base
 block content
-    h1 Speed Monitoring for the guardian
+    h1 Speed Monitoring for some publishers
 
     div.screenshot
     div.ct-chart
     table.table.table-striped.table-hover
         thead
             tr
-                th.series-a
-                    i 💻
-                    span http://www.theguardian.com/international
-                th.series-b
-                    i 📱
-                    span http://www.theguardian.com/international
+                each site in sites[0].sites
+                    th=site.label
                 th
         tbody
             include row

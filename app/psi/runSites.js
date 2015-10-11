@@ -51,7 +51,13 @@ module.exports = function (tenant) {
 			runAllSites(tenant).done(function (data) {
 
 				var tenantName = tenant.tenantName,
+                    csv;
+                try{
                     csv = require('./csv/'+tenantName);
+                }
+                catch(e){
+                    csv = require('./csv/default')
+                }
 				data = mapRelated(data);
 				data.tenant = tenantName;
 

@@ -6,28 +6,15 @@ var Promise = require('promise'),
 
 	psi = require('./psiWrapper'),
 	dynamoDb = require('./database/dynamoDb'),
-	uploadCsv = require('./upload/uploadCsv'),
 	uploadTemplate = require('./upload/uploadTemplate'),
-	tenantName = 'stern',
-    csv = require('./csv/'+tenantName);
+	tenantName = 'publishers';
 
 var render = function(fulfill, reject){
 
     dynamoDb.getSites(tenantName)
 // CSV erzeugen
 		.then(function (data) {
-			csv(data)
-				.then(compress)
-				.then(function (csvData) {
-					return uploadCsv(tenantName, csvData);
 
-				})
-				.then(function () {
-
-				}, function (err) {
-					reject(err);
-
-				});
 			return new Promise.resolve(data);
 			// kein Error handling!!
 
