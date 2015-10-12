@@ -7,9 +7,9 @@ block content
     table.table.table-striped.table-hover
         thead
             tr
-                each site in sites[0].sites
-                    th=site.label
-                th
+                each label in labels
+                    th=label
+                th Zeit
         tbody
             include row
 

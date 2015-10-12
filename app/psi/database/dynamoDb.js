@@ -26,7 +26,7 @@ module.exports = {
 
 					}
 					else {
-						console.log('entry saved to dynamodb');
+						console.log(data.tenant + ' saved to dynamodb');
 						fulfill(data);
 					}
 				});

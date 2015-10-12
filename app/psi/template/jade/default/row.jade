@@ -1,9 +1,9 @@
 each site, index in sites
-    tr
-        each r,index in site.sites
-            td(class=r.score < 50 ? "slow" : "",data-screenshot=r.filename)
-                span.psi= r.score
-                span.dcl= dcl(r.dcl)
-        td
-            span(title=moment(site.date).format('LLLL'))
-            span.date(data-date=site.isoDate)=site.isoDate
+	tr
+		each label in labels
+			td(class=site.sites[label].score < 50 ? "slow" : "",data-screenshot=site.sites[label].filename)
+				span.psi= site.sites[label].score
+				span.dcl= dcl(site.sites[label].dcl)
+		td
+			span(title=moment(site.date).format('LLLL'))
+			span.date(data-date=site.isoDate)=site.isoDate

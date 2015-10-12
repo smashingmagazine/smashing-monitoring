@@ -23,11 +23,7 @@ var render = function(fulfill, reject){
 		})
 		.then(function (data) {
 			data.tenant = tenantName;
-			template.rows(data).then(compress).then(function (rows) {
-				uploadTemplate(tenantName, 'rows.html', rows);
-			}, function (err) {
-				console.log(err);
-			});
+			
 
 			return template.index(tenantName, data);
 		}, function (err) {

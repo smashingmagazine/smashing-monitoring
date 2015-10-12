@@ -19,6 +19,7 @@ var jade = require('jade'),
 		});
 	},
     dcl = function(dcl){
+		'use strict';
         if(typeof dcl ==='undefined'){
             return '';
         }
@@ -36,11 +37,19 @@ var jade = require('jade'),
 module.exports = {
 	'rows': function (rows) {
 		'use strict';
+		// TODO DRY
+		var labels = [];
+		for (var property in rows[0].sites) {
+			if(rows[0].sites.hasOwnProperty(property)) {
+				labels.push(property);
+			}
+		}
+
 		return new Promise(function (fulfill, reject) {
 
 			var templateDir = './template/jade/' + rows.tenant,
 				render = function () {
-					jade.renderFile(templateDir + '/row.jade', {'sites': rows.slice(3), 'moment': moment,'dcl':dcl}, function (err, row) {
+					jade.renderFile(templateDir + '/row.jade', {  'labels':labels,'sites': rows.slice(3), 'moment': moment,'dcl':dcl}, function (err, row) {
 						if (err) {
 							reject(err);
 						}
@@ -64,6 +73,14 @@ module.exports = {
 	},
 	'index': function (tenant, data) {
 		'use strict';
+
+		var labels = [];
+		for (var property in data[0].sites) {
+			if(data[0].sites.hasOwnProperty(property)) {
+				labels.push(property);
+			}
+		}
+
 		return new Promise(function (fulfill, reject) {
 			readFiles(['./template/assets/app.css', './template/assets/app.js']).done(function (assets) {
 				var css = assets[0],
@@ -77,6 +94,7 @@ module.exports = {
 							'css': css,
 							'js': js,
                             'dcl':dcl,
+                            'labels':labels,
 							'chartist': chartist,
 							sites: data,
 							'moment': moment,
