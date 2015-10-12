@@ -1,15 +1,15 @@
 {
   "callMeBaby": {
     "Handler": "index.handler",
-    "FunctionName":"speed-monitor",
-    "Role": "arn:aws:iam::806424220409:role/upload",
+    "FunctionName":"smashing-monitoring",
+    "Role": "arn:aws:iam::420355340473:role/christianhaller",
     "MemorySize": 256,
     "Timeout": 59
   },
   "proxy": {
     "Handler": "index.handler",
     "FunctionName":"proxy",
-    "Role": "arn:aws:iam::806424220409:role/hey",
+    "Role": "arn:aws:iam::420355340473:role/christianhaller",
     "MemorySize": 256,
     "Timeout": 59
   }

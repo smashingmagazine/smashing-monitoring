@@ -7,7 +7,7 @@ lambda = new AWS.Lambda();
 exports.handler = function (event, context) {
 	'use strict';
     lambda.invoke({
-        FunctionName: 'speed-monitor',
+        FunctionName: 'smashing-monitoring',
         InvocationType: 'Event'
     }, function (error, data) {
         if (error) {
