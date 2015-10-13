@@ -1,16 +1,17 @@
 doctype html
 html(lang="en")
     head
-        title smashing pagespeed
+        title SmashingMagazine Pagespeed Monitor
         meta(charset='utf-8')
-        link(rel='shortcut icon', href='/favicon.ico', type='image/x-icon')
+        <!--[if IE]>link(rel='icon', href='favicon.ico')<![endif]-->
+        link(rel='icon', href='assets/favicon.png')
         meta(name="viewport", content="width=device-width, initial-scale=1")
         style.
             !{css}
 
     body.smashing
 
-        .container
+        header.container
             block content
         script.
             var series = [!{JSON.stringify(chartist.series['smashing'])},!{JSON.stringify(chartist.series['smashing-mobile'])}],labels = [!{chartist.labels}]; !{js}
