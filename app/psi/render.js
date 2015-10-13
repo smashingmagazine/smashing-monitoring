@@ -7,7 +7,7 @@ var Promise = require('promise'),
 	psi = require('./psiWrapper'),
 	dynamoDb = require('./database/dynamoDb'),
 	uploadTemplate = require('./upload/uploadTemplate'),
-	tenantName = 'publishers';
+	tenantName = 'smashing-monitoring';
 
 var render = function(fulfill, reject){
 
