@@ -56,7 +56,7 @@ module.exports = function (tenant) {
                     csv = require('./csv/'+tenantName);
                 }
                 catch(e){
-                    csv = require('./csv/default')
+                    csv = require('./csv/default');
                 }
 				data = mapRelated(data);
 				data.tenant = tenantName;

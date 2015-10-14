@@ -1,6 +1,6 @@
 /* global module */
 module.exports = {
-	'psiKey': 'AIzaSyBj4Ayjtf-mQo5MLbIxc-Qs_lWBI12BzZI',
+	'psiKey': 'AIzaSyAmPCTn1BIafHs-W9qGuTJylNOQGfsaMiQ',
 	'bucketName': 'smashing-monitoring',
 	'region': 'us-east-1',
 	'dynamodbTableName': 'smashing-monitoring',
